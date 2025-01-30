@@ -7,7 +7,9 @@ function App() {
     <>
       <Header />
 
-      <MainContent />
+      <section>
+        <MainContent />
+      </section>
 
       <section>
         <ContentsList title='인기 콘텐츠' />
