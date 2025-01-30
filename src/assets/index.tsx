@@ -1,18 +1,7 @@
-// className 입력해서 스타일 변경 가능
-/*
-play: (style?: string) => (
-    <svg
-      xmlns='http://www.w3.org/2000/svg'
-      fill='none'
-      viewBox='0 0 24 24'
-      strokeWidth={1.5}
-      stroke='currentColor'
-      className={`size-6 ${style}`}
-    >
-    ..
-*/
-
-export const ICONS = {
+interface IICONS {
+  [key: string]: JSX.Element
+}
+export const ICONS: IICONS = {
   search: (
     <svg
       xmlns='http://www.w3.org/2000/svg'
