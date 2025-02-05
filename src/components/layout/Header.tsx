@@ -2,7 +2,7 @@ import { ICONS } from '../../assets'
 
 function Header() {
   return (
-    <header className='sticky top-0 w-full flex gap-16 p-4 bg-black '>
+    <header className='sticky top-0 w-full flex gap-16 p-4 bg-black z-10'>
       {/* link 추가 */}
       <h1 className='font-black text-2xl text-red-600 px-2 hover:cursor-pointer'>
         XFlix
