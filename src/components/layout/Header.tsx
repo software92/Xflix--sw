@@ -8,18 +8,18 @@ function Header() {
         XFlix
       </h1>
       <nav className='flex w-full text-white font-medium justify-end sm:justify-between'>
-        <ol className='hidden gap-16 sm:flex'>
+        <ol className='hidden gap-8 sm:flex'>
           {/* link 추가 */}
           <li className='hover:opacity-80 self-center hover:cursor-pointer'>
             홈
           </li>
-          <li className='hover:opacity-80 self-center hover:cursor-pointer'>
+          <li className='hover:opacity-80 self-center hover:cursor-pointer '>
             TV 프로그램
           </li>
-          <li className='hover:opacity-80 self-center hover:cursor-pointer'>
+          <li className='hover:opacity-80 self-center hover:cursor-pointer '>
             영화
           </li>
-          <li className='hover:opacity-80 self-center hover:cursor-pointer'>
+          <li className='hover:opacity-80 self-center hover:cursor-pointer '>
             요즘 컨텐츠
           </li>
         </ol>
