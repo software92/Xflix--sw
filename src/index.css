@@ -5,3 +5,12 @@
 /* .big-text {
   @apply text-[8rem];
 } */
+
+/* @layer utilities {
+  .scrollbar-hide {
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    scrollbar-width: none;
+  }
+} */
