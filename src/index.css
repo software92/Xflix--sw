@@ -9,4 +9,8 @@
     }
     scrollbar-width: none;
   }
+
+  .main-page_px {
+    @apply px-8 md:px-16;
+  }
 }

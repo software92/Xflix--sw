@@ -21,7 +21,7 @@ function FeaturedMovie() {
         <div className='absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent' />
       </div>
 
-      <div className='relative h-full flex flex-col justify-center px-8 md:px-16'>
+      <div className='relative h-full flex flex-col justify-center main-page_px'>
         <h1 className='text-4xl md:text-6xl lg:text-7xl mb-4 text-white drop-shadow-lg'>
           메인 영화
         </h1>
