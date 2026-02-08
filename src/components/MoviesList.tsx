@@ -12,7 +12,7 @@ interface IMoviesList {
 // TODO: API 연동으로 슬라이드 카드에 데이터 뿌리기
 function MoviesList({ title }: IMoviesList) {
   return (
-    <div className='flex flex-col gap-4 m-4 text-white overflow-hidden h-60 group'>
+    <div className='flex flex-col gap-4 p-4 text-white overflow-hidden h-60 group'>
       <h2 className='text-2xl font-bold'>{title}</h2>
       <div className='relative h-full'>
         <button
