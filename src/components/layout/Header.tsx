@@ -1,14 +1,12 @@
 import { Link } from 'react-router'
 import { ICONS } from '../../assets'
 
+// TODO: 스크롤 시 헤더 배경색상 black으로 변경
 function Header() {
   return (
     <header
-      className='sticky top-0 w-full flex gap-16 p-4 z-10 
-      bg-gradient-to-b from-black/80 from-5% to-transparent
-      backdrop-blur-sm
-      '
-      // bg-black/50
+      className='fixed top-0 w-full flex gap-16 p-4 z-20 
+      bg-gradient-to-b from-black/80 to-transparent'
     >
       <h1 className='font-black text-3xl text-red-600 px-2'>XFlix</h1>
       <nav className='flex w-full text-white font-medium justify-end sm:justify-between'>

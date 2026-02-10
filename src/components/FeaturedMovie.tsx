@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router'
 import { ICONS } from '../assets'
 
 // TODO: url, title, description props로 받아오기
+// TODO: 이미지 클릭 시 deatail page 이동, 커서 포인터
+// TODO: 상세 정보 시 deatail page 이동
 function FeaturedMovie() {
   const navigate = useNavigate()
 
@@ -9,7 +11,7 @@ function FeaturedMovie() {
     navigate('/movies/toDetailPage')
   }
   return (
-    <article className='relative h-[70vh] w-full overflow-hidden'>
+    <article className='relative h-[90vh] w-full overflow-hidden'>
       {/* background image */}
       <div className='absolute inset-0'>
         <img
