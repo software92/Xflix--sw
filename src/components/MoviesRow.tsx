@@ -13,7 +13,7 @@ function MoviesRow() {
   }
 
   return (
-    <li className='aspect-video min-w-[250px] md:min-w-[300px] border-2 border-red-100 hover:scale-[1.04] ease-in delay-150 duration-150 group/button-hover'>
+    <li className='aspect-video min-w-[250px] md:min-w-[300px] border-2 border-red-100 hover:scale-[1.04] transition-transform ease-in delay-150 duration-150 group/button-hover'>
       {/* cover */}
       <div
         className='h-full flex flex-col justify-end gap-2 cursor-pointer rounded p-4 bg-black/10 opacity-0 group-hover/button-hover:opacity-80 duration-200'
