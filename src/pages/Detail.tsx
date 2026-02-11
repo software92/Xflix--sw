@@ -78,6 +78,27 @@ const imageBaseURL = (size: string = 'original') =>
   `https://image.tmdb.org/t/p/${size}`
 const backdropBaseURL = (size: string) => `https://image.tmdb.org/t/p/${size}/`
 
+{
+  /* <div
+          className={`bg-[url("${
+            imageBaseURL() + tempMovie.poster_path
+          }")] bg-cover bg-center bg-no-repeat h-[200px]`}
+        > */
+}
+{
+  /* floating btn - ui component*/
+}
+function FloatingButton() {
+  return (
+    <button
+      className='fixed top-20 left-4 md:left-10 rounded-full bg-black/60 backdrop-blur-sm text-white pl-2 pr-4 py-2 flex items-center gap-2 fill-white z-20'
+      onClick={() => console.log('뒤로 가기')}
+    >
+      {ICONS.leftArrow}
+      <span>뒤로 가기</span>
+    </button>
+  )
+}
 // TODO: API 연동해서 데이터 화면에 출력
 // TODO: 뒤로 가기 버튼 클릭 시 이전 페이지 이동
 
@@ -85,33 +106,25 @@ function Detail() {
   return (
     <>
       <div className='relative w-full flex flex-col justify-center gap-4'>
-        {/* <div
-          className={`bg-[url("${
-            imageBaseURL() + tempMovie.poster_path
-          }")] bg-cover bg-center bg-no-repeat h-[200px]`}
-        > */}
-        {/* floating btn - ui component*/}
-        <button
-          className='fixed top-20 left-4 md:left-10 rounded-full bg-black/60 backdrop-blur-sm text-white pl-2 pr-4 py-2 flex items-center gap-2 fill-white z-20'
-          onClick={() => console.log('뒤로 가기')}
-        >
-          {ICONS.leftArrow}
-          <span>뒤로 가기</span>
-        </button>
+        <FloatingButton />
         <div
-          className={`min-h-[80vh] w-full pt-44 md:pt-32 text-white z-10
-            flex flex-col gap-6
+          className={`min-h-[80vh] w-full text-white z-10
+            flex flex-col gap-6 justify-end pb-16 md:pb-32
             main-page_px`}
         >
-          <h1 className='text-4xl font-semibold'>{tempMovie.original_title}</h1>
+          <h1 className='font-light text-4xl md:text-6xl'>
+            {tempMovie.original_title}
+          </h1>
           {/* row */}
-          <div className='flex gap-4'>
+          <div className='flex gap-4 text-base md:text-lg'>
             <span>{tempMovie.release_date}</span>
             <span>
               {Math.floor(tempMovie.runtime / 60)}h {tempMovie.runtime % 60}m
             </span>
           </div>
-          <p className='line-clamp-2'>{tempMovie.overview}</p>
+          <p className='line-clamp-2 text-base md:text-lg'>
+            {tempMovie.overview}
+          </p>
           <div className='flex gap-3'>
             <button className='px-3 md:px-5 py-3 flex gap-2 items-center rounded-md bg-gray-200 text-black hover:bg-gray-200/95 text-sm'>
               {ICONS.play}
@@ -122,7 +135,7 @@ function Detail() {
               <span>상세 정보 버튼</span>
             </button>
           </div>
-          <div className='absolute bottom-0 left-[50%] translate-x-[-50%] animate-tongtong'>
+          <div className='absolute -bottom-6 left-[50%] translate-x-[-50%] animate-tongtong'>
             {ICONS.chevronDown}
           </div>
         </div>
