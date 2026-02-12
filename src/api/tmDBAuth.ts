@@ -23,20 +23,17 @@ export const apiValidCheck = async (): Promise<IAPIValidResult> => {
 
     const data: IAuthResponse = await response.json()
 
-    if (process.env.NODE_ENV === 'development') {
-      console.log('API 인증 OK')
-    }
+    devLog({ message: 'API 인증 OK' })
 
     return {
       data,
       error: null,
     }
   } catch (error: unknown) {
-    if (process.env.NODE_ENV === 'development') {
-      console.error(error)
-    }
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown Error'
+
+    devLog({ message: errorMessage, type: 'error' })
 
     return {
       data: null,
