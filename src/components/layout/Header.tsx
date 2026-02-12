@@ -2,6 +2,8 @@ import { Link } from 'react-router'
 import { ICONS } from '../../assets'
 
 // TODO: 스크롤 시 헤더 배경색상 black으로 변경
+// TODO: 반응형 네비게이션 바 고려(모바일 햄버거 메뉴)
+// TODO: 로고 이미지에 메인 페이지로 연결 링크 추가
 function Header() {
   return (
     <header

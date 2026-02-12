@@ -1,9 +1,11 @@
 import { useNavigate } from 'react-router'
 import { ICONS } from '../assets'
 
-// TODO: API 연결 후 props로 데이터를 받아 화면 출력
 // TODO: image cover 추가 > 추가 후 li의 border 제거
 // TODO: image 클릭 시 detail page 이동
+// TODO: 아이콘 변경으로 재생 버튼의 색상 변경(fill: white)
+// TODO: API 연결 후 props로 데이터를 받아 화면 출력
+// TODO: API 연동 후 스타일 최종 수정
 function MoviesRow() {
   const navigate = useNavigate()
 

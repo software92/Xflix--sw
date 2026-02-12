@@ -5,8 +5,9 @@ interface IMoviesList {
   title: string
 }
 
-// TODO: 슬라이더 형태로 변경, 버튼 클릭 시 좌우 이동(+애니메이션), 버튼을 screen상 좌우에 고정
+// [o] TODO: 슬라이더 형태로 변경, 버튼 클릭 시 좌우 이동(+애니메이션), 버튼을 screen상 좌우에 고정
 
+// TODO: h2>title text 크기 조정
 // TODO: 슬라이드의 왼쪽 오른쪽 끝에서 버튼 비활성화
 // TODO: 버튼을 클릭해서 슬라이드를 이동
 // TODO: API 연동으로 슬라이드 카드에 데이터 뿌리기
