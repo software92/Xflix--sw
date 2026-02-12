@@ -1,5 +1,5 @@
+import { API_CONFIG, API_ENDPOINT } from '../constants/api'
 import { devLog } from '../utils'
-import { BASE_URL, options } from './config'
 
 // 토큰 유효성 검사
 interface IAuthResponse {
@@ -14,7 +14,10 @@ interface IAPIValidResult {
 
 export const apiValidCheck = async (): Promise<IAPIValidResult> => {
   try {
-    const response = await fetch(BASE_URL, options)
+    const { BASE_URL, OPTIONS } = API_CONFIG
+    const { AUTH: { VALID = {} } = {} } = API_ENDPOINT
+
+    const response = await fetch(BASE_URL + VALID, OPTIONS)
 
     if (!response.ok) {
       // API 인증 실패
