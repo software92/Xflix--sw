@@ -1,8 +1,8 @@
 import { Outlet } from 'react-router'
-import Header from './components/layout/Header'
-import Footer from './components/layout/Footer'
+import Header from './Header'
+import Footer from './Footer'
 
-function App() {
+function RootLayout() {
   return (
     <main className='min-h-screen bg-black'>
       <Header />
@@ -12,4 +12,4 @@ function App() {
   )
 }
 
-export default App
+export default RootLayout

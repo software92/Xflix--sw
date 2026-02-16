@@ -1,27 +1,19 @@
-import { isRouteErrorResponse, Link, useRouteError } from 'react-router'
-
-interface IErrorPageProps {
-  message?: string
-}
+import { useRouteError, isRouteErrorResponse } from 'react-router'
+import { Link } from 'react-router'
 
 // [x] TODO: error 컴포넌트를 페이지 컴포넌트로 변경
-// [x] TODO: props로 message로 전달 받아 처리
-function ErrorPage({
-  message = '알 수 없는 에러가 발생했습니다.',
-}: IErrorPageProps) {
+function ErrorPage() {
   const error = useRouteError()
 
-  let errorMessage: string = message
+  let errorMessage = '알 수 없는 에러가 발생헀습니다.'
 
   if (isRouteErrorResponse(error)) {
-    if (error.status === 404) {
-      errorMessage = '알 수 없는 페이지입니다. 주소를 확인 해주세요'
-    } else {
-      errorMessage = error.statusText || message
-    }
+    errorMessage =
+      error.statusText || '알 수 없는 페이지입니다. 경로를 확인해주세요.'
   } else if (error instanceof Error) {
-    // non Route error
     errorMessage = error.message
+  } else if (typeof error === 'string') {
+    errorMessage = error
   }
   return (
     <main className='min-h-screen bg-black'>
