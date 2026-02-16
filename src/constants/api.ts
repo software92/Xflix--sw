@@ -24,4 +24,7 @@ export const API_ENDPOINT = {
     VALID: '/authentication',
   },
   TRENDING: '/trending/all/week',
+  MOVIE: {
+    DETAIL: (id: string | number) => `/movie/${id}`,
+  },
 } as const
