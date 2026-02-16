@@ -1,9 +1,9 @@
-function Spinner() {
+export function Spinner() {
   return (
     <div className='animate-spin rounded-full h-16 w-16 border-t-2 border-white mb-8'></div>
   )
 }
-function LoadingScreen() {
+export function LoadingScreen() {
   return (
     <div className='fixed inset-0 flex flex-col justify-center items-center bg-black text-white z-50'>
       <Spinner />
@@ -11,5 +11,3 @@ function LoadingScreen() {
     </div>
   )
 }
-
-export default LoadingScreen
