@@ -4,41 +4,17 @@ import { useEffect, useState } from 'react'
 import { getTrendingContents } from '../api/tmDBService'
 import { Spinner } from './LoadingScreen'
 import { routes } from '../constants/routes'
-
-enum MediaType {
-  MOVIE = 'movie',
-  TV = 'tv',
-}
-interface IContent {
-  backdrop_path: string
-  id: number
-  title: string
-  overview: string
-  poster_path: string
-  media_type: MediaType
-  genre_ids: number[]
-  release_date: Date
-}
-interface ITrendingContents {
-  page: number
-  results: IContent[]
-  total_pages: number
-  total_results: number
-}
-
-interface ITrendingResults {
-  data: ITrendingContents | null
-  error: string | null
-}
+import { IApiReturn, ITrendingContents } from '../types/api'
 
 // [x] TODO: url, title, description props로 받아오기
 // [x] TODO: 이미지 클릭 시 deatail page 이동, 커서 포인터
 // [x] TODO: 상세 정보 시 deatail page 이동
 function FeaturedMovie() {
-  const [error, setError] = useState<ITrendingResults['error']>(null)
+  const [error, setError] =
+    useState<IApiReturn<ITrendingContents>['error']>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [trendingContents, setTrendingContents] =
-    useState<ITrendingResults['data']>(null)
+    useState<IApiReturn<ITrendingContents>['data']>(null)
 
   const navigate = useNavigate()
 
