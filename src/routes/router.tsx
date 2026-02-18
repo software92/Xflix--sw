@@ -8,6 +8,7 @@ import { LoadingScreen } from '../components/LoadingScreen'
 import RootLayout from '../components/layout/RootLayout'
 import { authLoader } from './authLoader'
 import { routes } from '../constants/routes'
+import { removeRootPath } from '../utils'
 
 // TODO: 같은 구조를 공유하는 movies/, tvs/ 라우터를 하나의 라우터로 합치는 방법 고민(+확장성)
 export const router = createBrowserRouter([
@@ -20,17 +21,17 @@ export const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       {
-        path: routes.MOVIE.LIST,
+        path: removeRootPath(routes.MOVIE.LIST),
         children: [
           { index: true, element: <Movies /> },
-          { path: routes.MOVIE.PARAMETER, element: <Detail /> },
+          { path: removeRootPath(routes.MOVIE.PARAMETER), element: <Detail /> },
         ],
       },
       {
-        path: routes.TV.LIST,
+        path: removeRootPath(routes.TV.LIST),
         children: [
           { index: true, element: <TVs /> },
-          { path: routes.TV.PARAMETER, element: <Detail /> },
+          { path: removeRootPath(routes.TV.PARAMETER), element: <Detail /> },
         ],
       },
     ],
