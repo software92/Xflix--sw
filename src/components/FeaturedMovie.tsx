@@ -72,7 +72,7 @@ function FeaturedMovie() {
         <div className='absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent' />
       </Link>
 
-      <div className='pointer-events-none relative w-full lg:w-1/2 h-full flex flex-col justify-end pb-28 md:pb-40 main-page_px'>
+      <div className='pointer-events-none relative w-full lg:w-1/2 h-full flex flex-col justify-end pb-8 md:pb-16 main-page_px'>
         <h1 className='text-4xl md:text-6xl mb-4 text-white drop-shadow-lg'>
           {featuredMovie.title}
         </h1>

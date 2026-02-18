@@ -59,7 +59,7 @@ function Detail() {
       <div className='relative flex gap-4 main-page_px'>
         <div
           className={`min-h-[80vh] w-full text-white z-10
-            flex flex-col gap-6 justify-end pb-16 md:pb-32`}
+            flex flex-col gap-6 justify-end pb-8 md:pb-16`}
         >
           <h1 className='font-light text-4xl md:text-6xl'>{movie.title}</h1>
           <div className='flex gap-2'>
