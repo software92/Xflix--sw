@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router'
 import { ICONS } from '../../assets'
 import { routes } from '../../constants/routes'
-import { useGetScroll } from '../../hooks/useGetScroll'
-import { useScrollBlock } from '../../hooks/useScrollBlock'
 import Modal from '../common/Modal'
+import { useGetScroll, useScrollBlock } from '../../hooks/common'
 
 interface INavItem {
   navClass: string

@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { MEDIA_QUERY } from '../constants/breakpoints'
+import { MEDIA_QUERY } from '../../constants/breakpoints'
 
 export function useScrollBlock(
   isLocked: boolean,
