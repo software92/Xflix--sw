@@ -1,34 +1,21 @@
 import { Link, useNavigate } from 'react-router'
 import { ICONS } from '../assets'
-import { useEffect, useState } from 'react'
-import { getTrendingContents } from '../api/tmDBService'
 import { Spinner } from './LoadingScreen'
 import { routes } from '../constants/routes'
-import { IApiReturn, ITrendingContents } from '../types'
+import useGetMovies from '../hooks/domain/useGetMovies'
+import { API_ENDPOINT } from '../api/config'
 
 // [x] TODO: url, title, description props로 받아오기
 // [x] TODO: 이미지 클릭 시 deatail page 이동, 커서 포인터
 // [x] TODO: 상세 정보 시 deatail page 이동
 function FeaturedMovie() {
-  const [error, setError] =
-    useState<IApiReturn<ITrendingContents>['error']>(null)
-  const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [trendingContents, setTrendingContents] =
-    useState<IApiReturn<ITrendingContents>['data']>(null)
-
+  const { TRENDING } = API_ENDPOINT
+  const {
+    isLoading,
+    error,
+    contents: trendingContents,
+  } = useGetMovies(TRENDING)
   const navigate = useNavigate()
-
-  useEffect(() => {
-    async function fetchTrending() {
-      const result = await getTrendingContents()
-
-      setTrendingContents(result.data)
-      setIsLoading(false)
-      setError(result.error)
-    }
-
-    fetchTrending()
-  }, [])
 
   if (isLoading) {
     return (

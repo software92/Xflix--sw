@@ -1,18 +1,17 @@
-import { API_CONFIG, API_ENDPOINT } from '../constants/api'
-import { IApiReturn, ITrendingContents } from '../types/api'
+import { API_CONFIG, API_ENDPOINT } from './config'
+import { IApiReturn, ITmdbContents } from '../types/api'
 import { IContent, IMovie } from '../types/content'
 import { devLog } from '../utils'
 
-// 주간 인기 콘텐츠 조회 - FeaturedHero 컴포넌트 및 목록 페이지
-export const getTrendingContents = async (): Promise<
-  IApiReturn<ITrendingContents>
-> => {
+// get TV or Movie contents
+export const getTmdbContnets = async (
+  endPoint: string,
+): Promise<IApiReturn<ITmdbContents>> => {
   try {
     const { BASE_URL, LANGUAGE, OPTIONS } = API_CONFIG
-    const { TRENDING } = API_ENDPOINT
 
     const response = await fetch(
-      `${BASE_URL}${TRENDING}?language=${LANGUAGE}`,
+      `${BASE_URL}${endPoint}?language=${LANGUAGE}`,
       OPTIONS,
     )
 
@@ -20,7 +19,7 @@ export const getTrendingContents = async (): Promise<
       throw new Error('API 응답을 받아올 수 없습니다.')
     }
 
-    const data: ITrendingContents = await response.json()
+    const data: ITmdbContents = await response.json()
 
     return { data, error: null }
   } catch (error: unknown) {
@@ -33,16 +32,15 @@ export const getTrendingContents = async (): Promise<
   }
 }
 
+// get Movie details
 export const getMovie = async (
   id: number | string,
 ): Promise<IApiReturn<IMovie>> => {
   try {
     const { BASE_URL, LANGUAGE, OPTIONS } = API_CONFIG
-    const {
-      MOVIE: { DETAIL },
-    } = API_ENDPOINT
+    const { MOVIE_DETAIL } = API_ENDPOINT
     const response = await fetch(
-      `${BASE_URL}${DETAIL(id)}?language=${LANGUAGE}`,
+      `${BASE_URL}${MOVIE_DETAIL(id)}?language=${LANGUAGE}`,
       OPTIONS,
     )
 

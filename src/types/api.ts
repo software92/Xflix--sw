@@ -1,6 +1,6 @@
 import { IContent } from './content'
 
-export interface ITrendingContents {
+export interface ITmdbContents {
   page: number
   results: IContent[]
   total_pages: number

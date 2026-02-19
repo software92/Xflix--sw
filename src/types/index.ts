@@ -1,3 +1,3 @@
-export * from './api'
-export * from './common'
-export * from './content'
+export * as Api from './api'
+export * as Common from './common'
+export * as Content from './content'

@@ -1,4 +1,4 @@
-import { API_CONFIG, API_ENDPOINT } from '../constants/api'
+import { API_CONFIG, API_ENDPOINT } from './config'
 import { devLog } from '../utils'
 
 // 토큰 유효성 검사
@@ -15,9 +15,9 @@ interface IAPIValidResult {
 export const apiValidCheck = async (): Promise<IAPIValidResult> => {
   try {
     const { BASE_URL, OPTIONS } = API_CONFIG
-    const { AUTH: { VALID = {} } = {} } = API_ENDPOINT
+    const { AUTH_VALID } = API_ENDPOINT
 
-    const response = await fetch(BASE_URL + VALID, OPTIONS)
+    const response = await fetch(BASE_URL + AUTH_VALID, OPTIONS)
 
     if (!response.ok) {
       // API 인증 실패
@@ -36,7 +36,7 @@ export const apiValidCheck = async (): Promise<IAPIValidResult> => {
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown Error'
 
-    devLog({ message: errorMessage, type: 'error' })
+    devLog({ message: 'tmDBAuth 오류: ' + errorMessage, type: 'error' })
 
     return {
       data: null,
