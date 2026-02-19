@@ -3,7 +3,7 @@ import { getTmdbContnets } from '../../api/tmDBService'
 import { IApiReturn, ITmdbContents } from '../../types/api'
 import { ApiPath } from '../../api/config'
 
-function useGetMovies(endPoint: ApiPath) {
+function useGetContents(endPoint: ApiPath) {
   const [error, setError] = useState<IApiReturn<ITmdbContents>['error']>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [contents, setContents] =
@@ -28,4 +28,4 @@ function useGetMovies(endPoint: ApiPath) {
   }
 }
 
-export default useGetMovies
+export default useGetContents

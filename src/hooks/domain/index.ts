@@ -1,1 +1,1 @@
-export * from './useGetMovies'
+export * from './useGetContents'

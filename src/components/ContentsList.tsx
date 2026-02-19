@@ -1,6 +1,6 @@
 import { ApiPath } from '../api/config'
 import { ICONS } from '../assets'
-import useGetMovies from '../hooks/domain/useGetMovies'
+import useGetContents from '../hooks/domain/useGetContents'
 import { IContent } from '../types/content'
 import { Spinner } from './LoadingScreen'
 import ContentRow from './ContentRow'
@@ -14,13 +14,8 @@ interface IContentsList {
 }
 type scrollDirection = 'LEFT' | 'RIGHT'
 
-// [o] TODO: 슬라이더 형태로 변경, 버튼 클릭 시 좌우 이동(+애니메이션), 버튼을 screen상 좌우에 고정
-// [o] TODO: h2>title text 크기 조정
-// [o] TODO: API 연동으로 슬라이드 카드에 데이터 뿌리기
-// [o] TODO: 슬라이드의 왼쪽 오른쪽 끝에서 버튼 비활성화
-// [o] TODO: 버튼을 클릭해서 슬라이드를 이동
 function ContentsList({ title, category, apiPath }: IContentsList) {
-  const { isLoading, error, contents } = useGetMovies(apiPath)
+  const { isLoading, error, contents } = useGetContents(apiPath)
 
   const [isStart, setIsStart] = useState(true)
   const [isEnd, setIsEnd] = useState(false)

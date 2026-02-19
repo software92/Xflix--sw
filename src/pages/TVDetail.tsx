@@ -1,13 +1,17 @@
 import { useNavigate, useParams } from 'react-router'
 import { ICONS } from '../assets'
-import MoviesList from '../components/MoviesList'
 import { useEffect, useState } from 'react'
 import { getMovie } from '../api/tmDBService'
 import { Spinner } from '../components/LoadingScreen'
 import Modal from '../components/common/Modal'
-import { IApiReturn, IContent, IMovie } from '../types'
+import { IContent, IMovie } from '../types/content'
+import { IApiReturn } from '../types/api'
+import ContentsList from '../components/ContentsList'
+import { MediaType } from '../types/common'
 
-interface IMovieDetailSection {
+// TODO: TV detail 페이지 수정
+
+interface IMovieTVDetailSection {
   movie: IMovie | null
   isLoading: boolean
   error: IApiReturn<IContent>['error']
@@ -29,7 +33,7 @@ function FloatingButton() {
 
 // [x] TODO: API 연동해서 데이터 화면에 출력
 // [x] TODO: 뒤로 가기 버튼 클릭 시 이전 페이지 이동
-function Detail() {
+function TVDetail() {
   const [error, setError] = useState<IApiReturn<IContent>['error']>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [movie, setMovie] = useState<IApiReturn<IMovie>['data'] | IMovie>(null)
@@ -55,14 +59,14 @@ function Detail() {
   return (
     <>
       <article>
-        <MovieDetailSection
+        <MovieTVDetailSection
           movie={movie}
           error={error}
           isLoading={isLoading}
         />
 
-        <MoviesList title='인기 있는' />
-        <MoviesList title='액션' />
+        {/* temp  */}
+        {/* <ContentsList title='인기 있는' apiPath='' category={MediaType.MOVIE}/> */}
       </article>
       <Modal>
         <FloatingButton />
@@ -71,7 +75,11 @@ function Detail() {
   )
 }
 
-function MovieDetailSection({ movie, isLoading, error }: IMovieDetailSection) {
+function MovieTVDetailSection({
+  movie,
+  isLoading,
+  error,
+}: IMovieTVDetailSection) {
   if (isLoading) {
     return (
       <div className='relative min-h-[85vh] w-full flex flex-col justify-center items-center main-page_px'>
@@ -142,4 +150,4 @@ function MovieDetailSection({ movie, isLoading, error }: IMovieDetailSection) {
   )
 }
 
-export default Detail
+export default TVDetail

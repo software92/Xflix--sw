@@ -2,7 +2,7 @@ import { Link, useNavigate } from 'react-router'
 import { ICONS } from '../assets'
 import { Spinner } from './LoadingScreen'
 import { routes } from '../constants/routes'
-import useGetMovies from '../hooks/domain/useGetMovies'
+import useGetMovies from '../hooks/domain/useGetContents'
 import { API_ENDPOINT } from '../api/config'
 import { getTmdbImgPath } from '../utils'
 

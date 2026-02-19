@@ -3,15 +3,25 @@ import { IApiReturn, ITmdbContents } from '../types/api'
 import { devLog } from '../utils'
 import { IMovie } from '../types/content'
 
-// get TV or Movie contents
+// interface IFetch {
+//   path: string;
+//   query?: Record<string, string | number | boolean | undefined>,
+// }
+// const commonFetch = async ({path, query}) => {
+
+// }
+// get TV or Movie contents list
 export const getTmdbContnets = async (
   endPoint: string,
 ): Promise<IApiReturn<ITmdbContents>> => {
   try {
     const { BASE_URL, LANGUAGE, OPTIONS } = API_CONFIG
 
+    const params = new URLSearchParams()
+    params.set('language', LANGUAGE)
+
     const response = await fetch(
-      `${BASE_URL}${endPoint}?language=${LANGUAGE}`,
+      `${BASE_URL}${endPoint}?${params.toString()}`,
       OPTIONS,
     )
 
@@ -35,12 +45,23 @@ export const getTmdbContnets = async (
 // get Movie details
 export const getMovie = async (
   id: number | string,
+  query?: Record<string, string | number | boolean>,
 ): Promise<IApiReturn<IMovie>> => {
   try {
     const { BASE_URL, LANGUAGE, OPTIONS } = API_CONFIG
     const { MOVIE_DETAIL } = API_ENDPOINT
+
+    const params = new URLSearchParams()
+    params.set('language', LANGUAGE)
+
+    if (query) {
+      for (const [key, value] of Object.entries(query)) {
+        params.set(key, value.toString())
+      }
+    }
+
     const response = await fetch(
-      `${BASE_URL}${MOVIE_DETAIL(id)}?language=${LANGUAGE}`,
+      `${BASE_URL}${MOVIE_DETAIL(id)}?${params.toString()}`,
       OPTIONS,
     )
 
