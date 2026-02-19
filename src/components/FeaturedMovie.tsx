@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { getTrendingContents } from '../api/tmDBService'
 import { Spinner } from './LoadingScreen'
 import { routes } from '../constants/routes'
-import { IApiReturn, ITrendingContents } from '../types/api'
+import { IApiReturn, ITrendingContents } from '../types'
 
 // [x] TODO: url, title, description props로 받아오기
 // [x] TODO: 이미지 클릭 시 deatail page 이동, 커서 포인터
@@ -32,28 +32,23 @@ function FeaturedMovie() {
 
   if (isLoading) {
     return (
-      <article className='flex justify-center items-center h-[80vh] w-full overflow-hidden'>
+      <article className='flex justify-center items-center h-[80vh] w-full overflow-hidden bg-black'>
         <Spinner />
       </article>
     )
   }
 
-  if (
-    !trendingContents ||
-    trendingContents.results.length === 0 ||
-    error !== null
-  ) {
+  const featuredMovie = trendingContents?.results?.[0]
+
+  if (error || !featuredMovie) {
     throw new Error(error || '현재 영화 정보를 가져올 수 없습니다')
   }
-
-  const featuredMovie = trendingContents.results[0]
-
   const detailPageNavigate = () => {
     navigate(routes.MOVIE.DETAIL(featuredMovie.id))
   }
 
   return (
-    <article className='relative h-[80vh] w-full '>
+    <article className='relative h-[80vh] w-full'>
       <Link
         to={routes.MOVIE.DETAIL(featuredMovie.id)}
         className='absolute inset-0 z-0'
@@ -92,8 +87,6 @@ function FeaturedMovie() {
           </button>
         </div>
       </div>
-
-      {/* bottom fade */}
     </article>
   )
 }
