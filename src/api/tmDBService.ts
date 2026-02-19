@@ -1,7 +1,7 @@
 import { API_CONFIG, API_ENDPOINT } from './config'
 import { IApiReturn, ITmdbContents } from '../types/api'
-import { IContent, IMovie } from '../types/content'
 import { devLog } from '../utils'
+import { IMovie } from '../types/content'
 
 // get TV or Movie contents
 export const getTmdbContnets = async (
@@ -48,7 +48,7 @@ export const getMovie = async (
       throw new Error('현재 영화를 찾을 수 없습니다.')
     }
 
-    const movie: IContent = await response.json()
+    const movie: IMovie = await response.json()
 
     return { data: movie, error: null }
   } catch (error: unknown) {
