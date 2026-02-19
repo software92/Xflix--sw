@@ -4,6 +4,7 @@ import { Spinner } from './LoadingScreen'
 import { routes } from '../constants/routes'
 import useGetMovies from '../hooks/domain/useGetMovies'
 import { API_ENDPOINT } from '../api/config'
+import { getTmdbImgPath } from '../utils'
 
 // [x] TODO: url, title, description props로 받아오기
 // [x] TODO: 이미지 클릭 시 deatail page 이동, 커서 포인터
@@ -43,7 +44,7 @@ function FeaturedMovie() {
       >
         <div className='absolute inset-0'>
           <img
-            src={`https://image.tmdb.org/t/p/original/${featuredMovie.backdrop_path}`}
+            src={getTmdbImgPath({ path: featuredMovie.backdrop_path })}
             alt={`${featuredMovie.title} 포스터` || '영화 포스터'}
             className='w-full h-full object-cover'
           />

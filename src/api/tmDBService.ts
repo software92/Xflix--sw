@@ -26,7 +26,7 @@ export const getTmdbContnets = async (
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown Error'
 
-    devLog({ message: errorMessage, type: 'error' })
+    devLog({ message: 'getTmdbContnets: ' + errorMessage, type: 'error' })
 
     return { data: null, error: errorMessage }
   }
@@ -55,7 +55,7 @@ export const getMovie = async (
     const errorMessage =
       error instanceof Error ? error.message : 'Unknown Error'
 
-    devLog({ message: errorMessage, type: 'error' })
+    devLog({ message: 'getMovie: ' + errorMessage, type: 'error' })
 
     return { data: null, error: errorMessage }
   }
