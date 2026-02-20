@@ -1,7 +1,7 @@
 import { API_CONFIG, API_ENDPOINT } from './config'
 import { IApiReturn, ITmdbContents } from '../types/api'
 import { devLog } from '../utils'
-import { IMovie } from '../types/content'
+import { IContent, IMovie } from '../types/content'
 
 // interface IFetch {
 //   path: string;
@@ -14,7 +14,7 @@ import { IMovie } from '../types/content'
 // get TV or Movie contents list
 export const getTmdbContnets = async (
   endPoint: string,
-): Promise<IApiReturn<ITmdbContents>> => {
+): Promise<IApiReturn<IContent[]>> => {
   try {
     const { BASE_URL, LANGUAGE, OPTIONS } = API_CONFIG
 
@@ -31,7 +31,8 @@ export const getTmdbContnets = async (
       throw new Error('컨텐츠 정보를 가져올 수 없습니다.')
     }
 
-    const data: ITmdbContents = await response.json()
+    const result: ITmdbContents = await response.json()
+    const data: IContent[] = result?.results
 
     return { data, error: null }
   } catch (error: unknown) {

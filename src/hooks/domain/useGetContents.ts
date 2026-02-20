@@ -1,18 +1,18 @@
 import { useEffect, useState } from 'react'
 import { getTmdbContnets } from '../../api/tmDBService'
-import { IApiReturn, ITmdbContents } from '../../types/api'
 import { ApiPath } from '../../api/config'
+import { IContent } from '../../types/content'
 
 interface IFetchingDataReturn {
   error: string | null
   isLoading: boolean
-  contents: ITmdbContents | null
+  contents: IContent[] | null
 }
 
 function useGetContents(endPoint: ApiPath): IFetchingDataReturn {
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [contents, setContents] = useState<ITmdbContents | null>(null)
+  const [contents, setContents] = useState<IContent[] | null>(null)
 
   useEffect(() => {
     if (!endPoint) return

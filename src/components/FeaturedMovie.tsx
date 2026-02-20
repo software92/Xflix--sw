@@ -2,21 +2,36 @@ import { Link, useNavigate } from 'react-router'
 import { ICONS } from '../assets'
 import { Spinner } from './LoadingScreen'
 import { routes } from '../constants/routes'
-import useGetMovies from '../hooks/domain/useGetContents'
+import useGetContents from '../hooks/domain/useGetContents'
 import { API_ENDPOINT } from '../api/config'
-import { getTmdbImgPath } from '../utils'
+import { devLog, getTmdbImgPath } from '../utils'
+import { useMemo } from 'react'
+import { isMovie } from '../utils/typeGuards'
 
-// [x] TODO: url, title, description props로 받아오기
-// [x] TODO: 이미지 클릭 시 deatail page 이동, 커서 포인터
-// [x] TODO: 상세 정보 시 deatail page 이동
 function FeaturedMovie() {
   const { TRENDING } = API_ENDPOINT
-  const {
-    isLoading,
-    error,
-    contents: trendingContents,
-  } = useGetMovies(TRENDING)
+  const { isLoading, error, contents } = useGetContents(TRENDING)
   const navigate = useNavigate()
+
+  const featuredContent = useMemo(() => {
+    if (!contents || contents.length === 0) return null
+
+    const random = Math.floor(Math.random() * 5)
+    const content = contents[random]
+
+    return {
+      id: content.id,
+      title: isMovie(content) ? content.title : content.name,
+      backdropPath: getTmdbImgPath({
+        path: content.backdrop_path,
+        size: 'original',
+      }),
+      overview: content.overview,
+      detailUrl: isMovie(content)
+        ? routes.MOVIE.DETAIL(content.id)
+        : routes.TV.DETAIL(content.id),
+    }
+  }, [contents])
 
   if (isLoading) {
     return (
@@ -26,26 +41,28 @@ function FeaturedMovie() {
     )
   }
 
-  const featuredMovie = trendingContents?.results?.[0]
-
-  if (error || !featuredMovie) {
-    throw new Error(error || '현재 영화 정보를 가져올 수 없습니다')
+  if (error) {
+    devLog({ message: error, type: 'error' })
+    return null
   }
+
+  if (!featuredContent) return null
+
   const detailPageNavigate = () => {
-    navigate(routes.MOVIE.DETAIL(featuredMovie.id))
+    navigate(featuredContent?.detailUrl)
   }
 
   return (
     <article className='relative h-[80vh] w-full'>
       <Link
-        to={routes.MOVIE.DETAIL(featuredMovie.id)}
+        to={featuredContent.detailUrl}
         className='absolute inset-0 z-0'
-        aria-label='상세 페이지로 이동'
+        aria-label={`${featuredContent.title} 상세 페이지로 이동`}
       >
         <div className='absolute inset-0'>
           <img
-            src={getTmdbImgPath({ path: featuredMovie.backdrop_path })}
-            alt={`${featuredMovie.title} 포스터` || '영화 포스터'}
+            src={getTmdbImgPath({ path: featuredContent.backdropPath })}
+            alt={`${featuredContent.title} 포스터` || '영화 포스터'}
             className='w-full h-full object-cover'
           />
           <div className='absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent' />
@@ -57,10 +74,10 @@ function FeaturedMovie() {
 
       <div className='pointer-events-none relative w-full lg:w-1/2 h-full flex flex-col justify-end pb-8 md:pb-16 main-page_px'>
         <h1 className='text-4xl md:text-6xl mb-4 text-white drop-shadow-lg'>
-          {featuredMovie.title}
+          {featuredContent.title}
         </h1>
         <p className='text-base md:text-lg text-white/90 mb-8 line-clamp-3 drop-shadow-md'>
-          {featuredMovie.overview}
+          {featuredContent.overview}
         </p>
 
         <div className='flex gap-4 hover:*:opacity-80'>

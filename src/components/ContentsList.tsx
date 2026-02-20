@@ -1,11 +1,11 @@
 import { ApiPath } from '../api/config'
 import { ICONS } from '../assets'
 import useGetContents from '../hooks/domain/useGetContents'
-import { IContent } from '../types/content'
 import { Spinner } from './LoadingScreen'
 import ContentRow from './ContentRow'
 import { MediaType } from '../types/common'
 import { useRef, useState } from 'react'
+import { devLog } from '../utils'
 
 interface IContentsList {
   title: string
@@ -22,24 +22,25 @@ function ContentsList({ title, category, apiPath }: IContentsList) {
 
   const scrollRef = useRef<HTMLUListElement>(null)
 
-  function moveScroll(direction: scrollDirection) {
-    if (scrollRef?.current) {
-      const moveAmount = scrollRef.current.clientWidth / 2
-      const moving = direction === 'LEFT' ? -moveAmount : moveAmount
+  const someOfContents = contents?.slice(0, 6)
 
-      scrollRef.current.scrollBy({
-        left: moving,
-        behavior: 'smooth',
-      })
-    }
+  function moveScroll(direction: scrollDirection) {
+    if (!scrollRef?.current) return
+    const moveAmount = scrollRef.current.clientWidth / 2
+    const moving = direction === 'LEFT' ? -moveAmount : moveAmount
+
+    scrollRef.current.scrollBy({
+      left: moving,
+      behavior: 'smooth',
+    })
   }
 
   function handleScroll() {
     if (scrollRef?.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current
 
-      setIsStart(scrollLeft === 0 ? true : false)
-      setIsEnd(scrollLeft + clientWidth === scrollWidth ? true : false)
+      setIsStart(scrollLeft <= 10)
+      setIsEnd(scrollLeft + clientWidth >= scrollWidth - 10)
     }
   }
 
@@ -54,17 +55,14 @@ function ContentsList({ title, category, apiPath }: IContentsList) {
     )
   }
 
-  const isContents = contents && contents?.results?.length > 0
-
-  if (error || !isContents) {
-    throw new Error(error || '현재 컨텐츠 정보를 가져올 수 없습니다')
+  if (!someOfContents || error) {
+    if (error) devLog({ message: error, type: 'error' })
+    return null
   }
-
-  const contentsList: IContent[] = contents.results.slice(0, 6)
 
   return (
     <div
-      className='flex flex-col gap-4 p-4 text-white overflow-hidden h-60 mb-10
+      className='flex flex-col gap-4 p-4 text-white overflow-hidden h-60 my-10
       main-page_px'
     >
       <h2 className='text-2xl font-bold'>{title}</h2>
@@ -90,7 +88,7 @@ function ContentsList({ title, category, apiPath }: IContentsList) {
           ref={scrollRef}
           onScroll={handleScroll}
         >
-          {contentsList.map(content => (
+          {someOfContents.map(content => (
             <ContentRow
               key={content.id}
               category={category}

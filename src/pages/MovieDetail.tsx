@@ -12,7 +12,6 @@ import { devLog, getTmdbImgPath } from '../utils'
 
 interface IMovieMovieDetailSection {
   movie: IMovie | null
-  isLoading: boolean
   error: string | null
 }
 
@@ -37,10 +36,8 @@ function MovieDetail() {
         <MovieMovieDetailSection
           movie={movie}
           error={error}
-          isLoading={isLoading}
         />
 
-        {/* temp  */}
         <ContentsList
           title='비슷한 장르 영화'
           apiPath={API_ENDPOINT.MOVIE_SIMILAR(id!)}
