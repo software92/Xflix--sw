@@ -1,12 +1,8 @@
-import { ICastItem, IContentCommon, ICrewItem, IGenre } from './common'
+import { ICastItem, IContentCommon, ICrewItem } from './common'
 
 interface IMovieCastItem extends ICastItem {
   cast_id: number
 }
-// jop = 'Director' 감독
-// interface CrewItem {
-//   job: string
-// }
 
 interface Credits {
   cast: IMovieCastItem[]

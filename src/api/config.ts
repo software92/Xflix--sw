@@ -23,10 +23,12 @@ export const API_ENDPOINT = {
   AUTH_VALID: '/authentication',
   TRENDING: '/trending/all/week',
   AIRING_TODAY: '/tv/airing_today',
+  TV_POPULAR: '/tv/popular',
   NOW_PLAYING: '/movie/now_playing',
-  TV_POPULAR: '/movie/popular',
-  MOVIE_POPULAR: '/tv/popular',
-  MOVIE_DETAIL: (id: string | number): string => `/movie/${id}`,
+  MOVIE_POPULAR: '/movie/popular',
+  MOVIE_DETAIL: (id: string | number) => `/movie/${id}`,
+  MOVIE_SIMILAR: (id: string | number) => `/movie/${id}/similar`,
+  MOVIE_RECOMEND: (id: string | number) => `/movie/${id}/recommendations`,
 } as const
 
 export type ApiPath = {
