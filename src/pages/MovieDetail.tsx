@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router'
 import { ICONS } from '../assets'
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Spinner } from '../components/LoadingScreen'
 import Modal from '../components/common/Modal'
 import { IMovie } from '../types/content'
@@ -8,7 +8,8 @@ import ContentsList from '../components/ContentsList'
 import { MediaType } from '../types/common'
 import { API_ENDPOINT } from '../api/config'
 import useGetMovie from '../hooks/domain/useGetMovie'
-import { devLog, getTmdbImgPath } from '../utils'
+import { getTmdbImgPath } from '../utils'
+import ImageLazyLoadUI from '../components/common/ImageLazyLoadUI'
 
 interface IMovieMovieDetailSection {
   movie: IMovie | null
@@ -157,48 +158,19 @@ function FloatingButton() {
     </button>
   )
 }
+
 function MovieBackdrop({ path, title }: { path: string; title: string }) {
-  const [isHighImgLoad, setIsHighImgLoad] = useState(false)
   const lowImgUrl = getTmdbImgPath({ path, size: 'w300' })
-  const highImgUrl = getTmdbImgPath({ path, size: 'w1280' })
-
-  useEffect(() => {
-    setIsHighImgLoad(false)
-  }, [path])
-
-  if (!lowImgUrl) {
-    devLog({ message: 'backdrop 이미지가 없습니다' })
-  }
-
-  function handleImgLoad(e: React.SyntheticEvent<HTMLImageElement>) {
-    if (e.currentTarget.complete) {
-      setIsHighImgLoad(true)
-    }
-  }
+  const highImgUrl = getTmdbImgPath({ path, size: 'original' })
 
   return (
     <div className='absolute inset-0'>
-      <img
-        className={`absolute inset-0 w-full h-full object-cover`}
-        src={lowImgUrl}
-        alt={`${title} 포스터` || '영화 포스터'}
+      <ImageLazyLoadUI
+        lowUrl={lowImgUrl}
+        highUrl={highImgUrl}
+        style='absolute inset-0 w-full h-full object-fill'
+        name={title}
       />
-
-      <img
-        key={highImgUrl}
-        className={`absolute inset-0 w-full h-full object-cover
-          transition-opacity duration-700 ease-in-out ${isHighImgLoad ? 'opacity-100' : 'opacity-0'}`}
-        src={highImgUrl}
-        alt={`${title} 포스터` || '영화 포스터'}
-        onLoad={handleImgLoad}
-        ref={el => {
-          if (el?.complete && !isHighImgLoad) {
-            setIsHighImgLoad(true)
-          }
-        }}
-      />
-
-      {/* transition-opacity ease-in-out ${isHighImgLoad ? 'opacity-100' : 'opacity-0'} */}
 
       <div className='absolute inset-0 bg-gradient-to-r from-black/70 to-black/0' />
       <div className='absolute inset-0 bg-gradient-to-t from-black via-black/10 to-transparent' />

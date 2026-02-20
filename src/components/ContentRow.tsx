@@ -1,60 +1,70 @@
-import { useNavigate } from 'react-router'
+import { Link } from 'react-router'
 import { ICONS } from '../assets'
 import { IContent } from '../types/content'
 import { routes } from '../constants/routes'
 import { MediaType } from '../types/common'
 import { getTmdbImgPath } from '../utils'
-
-// TODO: image cover 추가 > 추가 후 li의 border 제거
-// TODO: image 클릭 시 detail page 이동
-// TODO: 아이콘 변경으로 재생 버튼의 색상 변경(fill: white)
-// TODO: API 연결 후 props로 데이터를 받아 화면 출력
-// TODO: API 연동 후 스타일 최종 수정
+import { isMovie } from '../utils/typeGuards'
 
 interface IContentRow {
   content: IContent
   category: MediaType
 }
+
+// [o] TODO: image cover 추가 > 추가 후 li의 border 제거
+// [o] TODO: image 클릭 시 detail page 이동
+// [o] TODO: 아이콘 변경으로 재생 버튼의 색상 변경(fill: white)
+// [o] TODO: API 연결 후 props로 데이터를 받아 화면 출력
+// [o] TODO: API 연동 후 스타일 최종 수정
 function ContentRow({ content, category }: IContentRow) {
-  const navigate = useNavigate()
+  const isMovieCategory = category === MediaType.MOVIE
 
-  console.log('content', content)
+  const navPath = (id: string | number) =>
+    isMovieCategory ? routes.MOVIE.DETAIL(id) : routes.TV.DETAIL(id)
 
-  // detail page 연결(movies / tvs)
-  const handleClick = () => {
-    if (category === MediaType.MOVIE) {
-      navigate(routes.MOVIE.DETAIL(content.id))
-    } else {
-      navigate(routes.TV.DETAIL(content.id))
-    }
-    return
-  }
+  const title = isMovie(content) ? content.title : content.name
+
+  const lowImageUrl = getTmdbImgPath({
+    size: 'w300',
+    path: content.backdrop_path,
+  })
 
   return (
-    <li className='relative aspect-video min-w-[250px] md:min-w-[300px] hover:opacity-60 transition-colors ease-in delay-150 duration-150 group/button-hover'>
-      {/* cover */}
-      <img
-        className='absolute inset-0 aspect-video bg-white'
-        src={getTmdbImgPath({ size: 'w300', path: content.backdrop_path })}
-        alt={`${content.title} 이미지`}
-      />
-      <div
-        className='h-full flex flex-col justify-end gap-2 cursor-pointer rounded p-4 bg-black/10 opacity-0 group-hover/button-hover:opacity-80 duration-200'
-        onClick={handleClick}
+    <li className='relative aspect-video min-w-[250px] md:min-w-[300px] hover:opacity-70 transition-colors ease-in delay-150 duration-150 z-10 group/button-hover'>
+      <Link
+        to={navPath(content.id)}
+        className='block w-full h-full'
+        aria-label={`${title} 상세보기`}
       >
-        <h2 className='text-lg font-semibold text-red-800'>영화 a</h2>
+        {content.backdrop_path && (
+          <img
+            className='w-full h-full object-fill bg-gray-800'
+            src={lowImageUrl}
+            alt={title}
+          />
+        )}
+      </Link>
+
+      <div className='absolute inset-0 p-4 flex flex-col justify-end gap-2 opacity-0 group-hover/button-hover:opacity-100 transition-opacity duration-300 pointer-events-none bg-gradient-to-t from-black/80 via-black/20 to-transparent'>
+        <h2 className='text-white text-lg font-bold truncate'>{title}</h2>
         <div className='flex gap-2'>
-          {/* 재생, 목록 추가 버튼 동작은 미 구현 */}
-          {[ICONS.play, ICONS.plus].map((icon, idx) => (
+          {[
+            { icon: ICONS.play, label: '재생' },
+            { icon: ICONS.plus, label: '목록 추가' },
+          ].map((item, idx) => (
             <button
               key={idx}
-              className='p-2 bg-red-400 rounded-full'
+              type='button'
+              aria-label={item.label}
+              className='p-2 bg-white/20 hover:bg-red-600 rounded-full backdrop-blur-md transition-all duration-200 hover:scale-110 active:scale-95 flex items-center justify-center pointer-events-auto'
               onClick={e => {
                 e.stopPropagation()
-                console.log('btn')
+                console.log(item.label)
               }}
             >
-              {icon}
+              <span className='w-5 h-5 fill-white flex items-center justify-center'>
+                {item.icon}
+              </span>
             </button>
           ))}
         </div>
