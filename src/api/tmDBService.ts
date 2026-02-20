@@ -10,6 +10,7 @@ import { IMovie } from '../types/content'
 // const commonFetch = async ({path, query}) => {
 
 // }
+
 // get TV or Movie contents list
 export const getTmdbContnets = async (
   endPoint: string,
@@ -19,6 +20,7 @@ export const getTmdbContnets = async (
 
     const params = new URLSearchParams()
     params.set('language', LANGUAGE)
+    params.set('page', '1')
 
     const response = await fetch(
       `${BASE_URL}${endPoint}?${params.toString()}`,
@@ -26,7 +28,7 @@ export const getTmdbContnets = async (
     )
 
     if (!response.ok) {
-      throw new Error('API 응답을 받아올 수 없습니다.')
+      throw new Error('컨텐츠 정보를 가져올 수 없습니다.')
     }
 
     const data: ITmdbContents = await response.json()
@@ -81,3 +83,36 @@ export const getMovie = async (
     return { data: null, error: errorMessage }
   }
 }
+
+// export const getSimilarMovies = async (
+//   id: number | string,
+// ): Promise<IApiReturn<ITmdbContents>> => {
+//   try {
+//     const { BASE_URL, LANGUAGE, OPTIONS } = API_CONFIG
+//     const { MOVIE_SIMILAR } = API_ENDPOINT
+
+//     const params = new URLSearchParams()
+//     params.set('language', LANGUAGE)
+//     params.set('page', '1')
+
+//     const response = await fetch(
+//       `${BASE_URL}${MOVIE_SIMILAR(id)}?${params.toString()}`,
+//       OPTIONS,
+//     )
+
+//     if (!response.ok) {
+//       throw new Error('현재 유사한 영화 목록을 찾을 수 없습니다.')
+//     }
+
+//     const movies: ITmdbContents = await response.json()
+
+//     return { data: movies, error: null }
+//   } catch (error: unknown) {
+//     const errorMessage =
+//       error instanceof Error ? error.message : 'Unknown Error'
+
+//     devLog({ message: 'getSimilarMovies: ' + errorMessage, type: 'error' })
+
+//     return { data: null, error: errorMessage }
+//   }
+// }

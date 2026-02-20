@@ -3,13 +3,20 @@ import { getTmdbContnets } from '../../api/tmDBService'
 import { IApiReturn, ITmdbContents } from '../../types/api'
 import { ApiPath } from '../../api/config'
 
-function useGetContents(endPoint: ApiPath) {
-  const [error, setError] = useState<IApiReturn<ITmdbContents>['error']>(null)
+interface IFetchingDataReturn {
+  error: string | null
+  isLoading: boolean
+  contents: ITmdbContents | null
+}
+
+function useGetContents(endPoint: ApiPath): IFetchingDataReturn {
+  const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
-  const [contents, setContents] =
-    useState<IApiReturn<ITmdbContents>['data']>(null)
+  const [contents, setContents] = useState<ITmdbContents | null>(null)
 
   useEffect(() => {
+    if (!endPoint) return
+
     async function fetchTrending() {
       const result = await getTmdbContnets(endPoint)
 
@@ -19,7 +26,7 @@ function useGetContents(endPoint: ApiPath) {
     }
 
     fetchTrending()
-  }, [])
+  }, [endPoint])
 
   return {
     error,
