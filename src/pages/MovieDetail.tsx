@@ -108,6 +108,7 @@ function MovieMovieDetailSection({
           >
             <h1 className='font-light text-4xl md:text-6xl'>{movie.title}</h1>
             <div className='flex gap-4 text-base md:text-lg'>
+              {movie?.adult && <AdultUI />}
               <span>{movie.release_date}</span>
               <span>
                 {Math.floor(movie.runtime / 60)}시간 {movie.runtime % 60}분
@@ -168,4 +169,11 @@ function MovieMovieDetailSection({
   )
 }
 
+function AdultUI() {
+  return (
+    <div className='border border-white px-2 rounded-md'>
+      <span>19</span>
+    </div>
+  )
+}
 export default MovieDetail
