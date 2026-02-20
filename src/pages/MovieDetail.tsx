@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router'
 import { ICONS } from '../assets'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Spinner } from '../components/LoadingScreen'
 import Modal from '../components/common/Modal'
 import { IMovie } from '../types/content'
@@ -12,7 +12,7 @@ import { devLog, getTmdbImgPath } from '../utils'
 
 interface IMovieMovieDetailSection {
   movie: IMovie | null
-  isHighImgLoading: boolean
+  isLoading: boolean
   error: string | null
 }
 
@@ -20,9 +20,9 @@ interface IMovieMovieDetailSection {
 // [x] TODO: 뒤로 가기 버튼 클릭 시 이전 페이지 이동
 function MovieDetail() {
   const { id } = useParams()
-  const { error, isHighImgLoading, movie } = useGetMovie(id!)
+  const { error, isLoading, movie } = useGetMovie(id!)
 
-  if (isHighImgLoading) {
+  if (isLoading) {
     return (
       <div className='relative min-h-[85vh] w-full flex flex-col justify-center items-center main-page_px'>
         <Spinner />
@@ -37,7 +37,7 @@ function MovieDetail() {
         <MovieMovieDetailSection
           movie={movie}
           error={error}
-          isHighImgLoading={isHighImgLoading}
+          isLoading={isLoading}
         />
 
         {/* temp  */}
@@ -59,91 +59,91 @@ function MovieDetail() {
   )
 }
 
-function MovieMovieDetailSection({
-  movie,
-  isHighImgLoading,
-  error,
-}: IMovieMovieDetailSection) {
-  if (!isHighImgLoading && !movie && error) {
+function MovieMovieDetailSection({ movie, error }: IMovieMovieDetailSection) {
+  if (!movie && error) {
     throw new Error(error || '현재 영화 정보를 가져올 수 없습니다')
   }
 
-  const actors = movie?.credits?.cast.slice(0, 5).map(actor => actor.name)
-  const genres = movie?.genres?.map(genre => genre.name)
-  const director = movie?.credits?.crew.find(
-    person => person.job === 'Director',
-  )?.name
+  const movieMoreInfo = useMemo(() => {
+    if (!movie) return
+
+    const actors = movie.credits?.cast
+      .slice(0, 5)
+      .map(actor => actor.name)
+      .join(', ')
+    const genres = movie.genres?.map(genre => genre.name).join(', ')
+    const director = movie?.credits?.crew.find(
+      person => person.job === 'Director',
+    )?.name
+    const runtime = `${Math.floor(movie.runtime / 60)}시간 ${movie.runtime % 60}분`
+
+    return { actors, genres, director, runtime }
+  }, [movie])
+
+  if (!movie || !movieMoreInfo) return null
 
   return (
-    movie && (
-      <div className='pb-10 *:main-page_px'>
-        <div className='relative min-h-[85vh] w-full flex gap-4'>
-          <div
-            className={`text-white z-10
+    <div className='pb-10 *:main-page_px'>
+      <div className='relative min-h-[85vh] w-full flex gap-4'>
+        <div
+          className={`text-white z-10
             flex flex-col gap-6 justify-end pb-8 md:pb-16`}
-          >
-            <h1 className='font-semibold text-4xl md:text-6xl text-balance'>
-              {movie.title}
-            </h1>
-            <div className='flex gap-4 text-base md:text-lg'>
-              {movie?.adult && <AdultUI />}
-              <span>{movie.release_date}</span>
-              <span>
-                {Math.floor(movie.runtime / 60)}시간 {movie.runtime % 60}분
-              </span>
-            </div>
-
-            <p className='line-clamp-2 text-base md:text-lg'>{movie.tagline}</p>
-            <div className='flex gap-3'>
-              <button className='px-3 md:px-4 py-4 flex gap-2 items-center rounded-md bg-gray-200 text-black hover:bg-gray-200/95 text-sm'>
-                {ICONS.play}
-                <span className='text-lg font-semibold'>재생</span>
-              </button>
-              <button className='px-3 md:px-5 py-4 flex gap-2 items-center rounded-md hover:bg-white/30 bg-gray-300/25 text-white backdrop-blur-md text-sm'>
-                {ICONS.plus}
-                <span className='text-lg font-semibold'>상세 정보 버튼</span>
-              </button>
-            </div>
-            <div className='absolute -bottom-6 left-[50%] translate-x-[-50%] animate-tongtong'>
-              {ICONS.chevronDown}
-            </div>
+        >
+          <h1 className='font-semibold text-4xl md:text-6xl text-balance'>
+            {movie.title}
+          </h1>
+          <div className='flex gap-4 text-base md:text-lg'>
+            {movie?.adult && <AdultUI />}
+            <span>{movie.release_date}</span>
+            <span>{movieMoreInfo.runtime}</span>
           </div>
-          <MovieBackdrop
-            path={movie?.backdrop_path}
-            title={movie?.title}
-          />
+
+          <p className='line-clamp-2 text-base md:text-lg'>{movie.tagline}</p>
+          <div className='flex gap-3'>
+            <button className='px-3 md:px-4 py-4 flex gap-2 items-center rounded-md bg-gray-200 text-black hover:bg-gray-200/95 text-sm'>
+              {ICONS.play}
+              <span className='text-lg font-semibold'>재생</span>
+            </button>
+            <button className='px-3 md:px-5 py-4 flex gap-2 items-center rounded-md hover:bg-white/30 bg-gray-300/25 text-white backdrop-blur-md text-sm'>
+              {ICONS.plus}
+              <span className='text-lg font-semibold'>상세 정보 버튼</span>
+            </button>
+          </div>
+          <div className='absolute -bottom-6 left-[50%] translate-x-[-50%] animate-tongtong'>
+            {ICONS.chevronDown}
+          </div>
         </div>
-        <div className='flex flex-col gap-20 mt-10 md:flex-row md:gap-10 text-white'>
-          {movie.overview && (
-            <div className='flex flex-col gap-4 w-full md:w-3/4'>
-              <h3>줄거리</h3>
-              <span>{movie.overview}</span>
+        <MovieBackdrop
+          path={movie.backdrop_path}
+          title={movie.title}
+        />
+      </div>
+      <div className='flex flex-col gap-20 mt-10 md:flex-row md:gap-10 text-white'>
+        {movie.overview && (
+          <div className='flex flex-col gap-4 w-full md:w-3/4'>
+            <h3>줄거리</h3>
+            <span>{movie.overview}</span>
+          </div>
+        )}
+        <div className='flex flex-col gap-3 w-full md:w-1/4'>
+          {[
+            { label: '출연', content: movieMoreInfo.actors },
+            { label: '장르', content: movieMoreInfo.genres },
+            { label: '감독', content: movieMoreInfo.director },
+          ].map((item, idx) => (
+            <div
+              key={idx}
+              className='flex items-center gap-2'
+            >
+              <h4 className='text-sm text-gray-400/80 text-nowrap place-self-start'>
+                {`${item.label}: `}
+              </h4>
+              <span className='text-sm place-self-start'>{item.content}</span>
             </div>
-          )}
-          {(actors || genres || director) && (
-            <div className='flex flex-col gap-3 w-full md:w-1/4'>
-              {[
-                { label: '출연', content: actors?.join(', ') },
-                { label: '장르', content: genres?.join(', ') },
-                { label: '감독', content: director },
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className='flex items-center gap-2'
-                >
-                  <h4 className='text-sm text-gray-400/80 text-nowrap place-self-start'>
-                    {item.label}:{' '}
-                  </h4>
-                  <span className='text-sm place-self-start'>
-                    {item.content}
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
+          ))}
         </div>
       </div>
-    )
+    </div>
   )
 }
 
