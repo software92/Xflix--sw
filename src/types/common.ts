@@ -43,7 +43,8 @@ export interface ICrewItem {
 export interface IContentCommon {
   adult: boolean
   backdrop_path?: string
-  genres: IGenre[]
+  genre_ids?: number[]
+  genres?: IGenre[]
   id: number
   overview: string
   poster_path: string

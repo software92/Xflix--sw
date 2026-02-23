@@ -14,6 +14,7 @@ import { IMovie } from '../types/content'
 // get Movie contents list result
 export const getTmdbContnets = async (
   endPoint: string,
+  query?: Record<string, string | number | boolean>,
 ): Promise<IApiReturn<IMovie[]>> => {
   try {
     const { BASE_URL, LANGUAGE, OPTIONS } = API_CONFIG
@@ -21,6 +22,12 @@ export const getTmdbContnets = async (
     const params = new URLSearchParams()
     params.set('language', LANGUAGE)
     params.set('page', '1')
+
+    if (query) {
+      for (const [key, value] of Object.entries(query)) {
+        params.set(key, value.toString())
+      }
+    }
 
     const response = await fetch(
       `${BASE_URL}${endPoint}?${params.toString()}`,

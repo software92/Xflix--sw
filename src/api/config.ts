@@ -22,8 +22,9 @@ export const API_CONFIG: IApiConfig = {
 export const API_ENDPOINT = {
   AUTH_VALID: '/authentication',
   TRENDING: '/trending/movie/week',
-  NOW_PLAYING: '/movie/now_playing',
+  MOVIE_UPCOMING: '/movie/upcoming',
   MOVIE_POPULAR: '/movie/popular',
+  MOVIE_TOPRATED: '/movie/top_rated',
   MOVIE_DETAIL: (id: string | number) => `/movie/${id}`,
   MOVIE_SIMILAR: (id: string | number) => `/movie/${id}/similar`,
   MOVIE_RECOMEND: (id: string | number) => `/movie/${id}/recommendations`,

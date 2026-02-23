@@ -1,19 +1,15 @@
 import { Link } from 'react-router'
 import { ICONS } from '../assets'
-import { IContent } from '../types/content'
+import { IMovie } from '../types/content'
 import { routes } from '../constants/routes'
 import { getTmdbImgPath } from '../utils'
-
-interface IContentRow {
-  content: IContent
-}
 
 // [o] TODO: image cover 추가 > 추가 후 li의 border 제거
 // [o] TODO: image 클릭 시 detail page 이동
 // [o] TODO: 아이콘 변경으로 재생 버튼의 색상 변경(fill: white)
 // [o] TODO: API 연결 후 props로 데이터를 받아 화면 출력
 // [o] TODO: API 연동 후 스타일 최종 수정
-function ContentRow({ content }: IContentRow) {
+function ContentRow({ content }: { content: IMovie }) {
   const navPath = (id: string | number) => routes.MOVIE.DETAIL(id)
 
   const title = content.title

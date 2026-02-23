@@ -9,11 +9,12 @@ import { devLog } from '../utils'
 interface IContentsList {
   title: string
   apiPath: ApiPath
+  params?: { [key: string]: string }
 }
 type scrollDirection = 'LEFT' | 'RIGHT'
 
-function ContentsList({ title, apiPath }: IContentsList) {
-  const { isLoading, error, contents } = useGetContents(apiPath)
+function ContentsList({ title, apiPath, params }: IContentsList) {
+  const { isLoading, error, contents } = useGetContents(apiPath, params)
 
   const [isStart, setIsStart] = useState(true)
   const [isEnd, setIsEnd] = useState(false)
@@ -52,6 +53,8 @@ function ContentsList({ title, apiPath }: IContentsList) {
       </div>
     )
   }
+
+  if (contents && contents?.length === 0) return null
 
   if (!someOfContents || error) {
     if (error) devLog({ message: error, type: 'error' })

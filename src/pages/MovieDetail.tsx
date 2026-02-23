@@ -15,11 +15,15 @@ interface IMovieMovieDetailSection {
   error: string | null
 }
 
+const queryParams = {
+  append_to_response: 'credits',
+}
+
 // [x] TODO: API 연동해서 데이터 화면에 출력
 // [x] TODO: 뒤로 가기 버튼 클릭 시 이전 페이지 이동
 function MovieDetail() {
   const { id } = useParams()
-  const { error, isLoading, movie } = useGetMovie(id!)
+  const { error, isLoading, movie } = useGetMovie(id!, queryParams)
 
   if (isLoading) {
     return (

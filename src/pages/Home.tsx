@@ -14,14 +14,19 @@ import ContentsList from '../components/ContentsList'
 
 const categoryList = [
   {
-    id: 1,
-    title: '상영중인 영화',
-    apiPath: API_ENDPOINT.NOW_PLAYING,
+    id: 2,
+    title: '개봉 예정인 영화',
+    apiPath: API_ENDPOINT.MOVIE_UPCOMING,
   },
   {
     id: 3,
     title: '인기 영화',
     apiPath: API_ENDPOINT.MOVIE_POPULAR,
+  },
+  {
+    id: 4,
+    title: '평점이 높은 영화',
+    apiPath: API_ENDPOINT.MOVIE_TOPRATED,
   },
 ]
 
@@ -35,6 +40,7 @@ function Home() {
             key={contents.id}
             title={contents.title}
             apiPath={contents.apiPath}
+            params={{ region: 'KR' }}
           />
         ))}
       </article>

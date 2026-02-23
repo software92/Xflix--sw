@@ -8,7 +8,10 @@ interface IFetchingDataReturn {
   movie: IMovie | null
 }
 
-function useGetMovie(id: number | string): IFetchingDataReturn {
+function useGetMovie(
+  id: number | string,
+  queryParams: { [key: string]: string },
+): IFetchingDataReturn {
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState<boolean>(true)
   const [movie, setMovie] = useState<IMovie | null>(null)
@@ -16,10 +19,8 @@ function useGetMovie(id: number | string): IFetchingDataReturn {
   useEffect(() => {
     if (!id) return setIsLoading(false)
 
-    const params = { append_to_response: 'credits' }
-
     async function fetchMovie(id: string | number) {
-      const result = await getMovie(id, params)
+      const result = await getMovie(id, queryParams)
 
       setMovie(result.data)
       setIsLoading(false)
