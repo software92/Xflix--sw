@@ -1,6 +1,5 @@
 export enum MediaType {
   MOVIE = 'movie',
-  TV = 'tv',
 }
 
 export interface IGenre {
@@ -43,7 +42,7 @@ export interface ICrewItem {
 
 export interface IContentCommon {
   adult: boolean
-  backdrop_path: string
+  backdrop_path?: string
   genres: IGenre[]
   id: number
   overview: string

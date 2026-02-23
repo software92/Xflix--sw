@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { devLog } from '../../utils'
 
 interface IImageLazyLoadUI {
-  lowUrl: string
-  highUrl: string
-  style: string
-  name: string
+  lowUrl?: string
+  highUrl?: string
+  style?: string
+  name?: string
 }
 
 function ImageLazyLoadUI({ lowUrl, highUrl, style, name }: IImageLazyLoadUI) {
@@ -21,8 +21,9 @@ function ImageLazyLoadUI({ lowUrl, highUrl, style, name }: IImageLazyLoadUI) {
     }
   }
 
-  if (!lowUrl) {
+  if (!lowUrl && !highUrl) {
     devLog({ message: 'backdrop 이미지가 없습니다' })
+    return null
   }
 
   return (

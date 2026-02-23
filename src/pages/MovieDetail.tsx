@@ -5,7 +5,6 @@ import { Spinner } from '../components/LoadingScreen'
 import Modal from '../components/common/Modal'
 import { IMovie } from '../types/content'
 import ContentsList from '../components/ContentsList'
-import { MediaType } from '../types/common'
 import { API_ENDPOINT } from '../api/config'
 import useGetMovie from '../hooks/domain/useGetMovie'
 import { getTmdbImgPath } from '../utils'
@@ -42,12 +41,10 @@ function MovieDetail() {
         <ContentsList
           title='비슷한 장르 영화'
           apiPath={API_ENDPOINT.MOVIE_SIMILAR(id!)}
-          category={MediaType.MOVIE}
         />
         <ContentsList
           title='추천하는 영화'
           apiPath={API_ENDPOINT.MOVIE_RECOMEND(id!)}
-          category={MediaType.MOVIE}
         />
       </article>
       <Modal>
@@ -159,7 +156,9 @@ function FloatingButton() {
   )
 }
 
-function MovieBackdrop({ path, title }: { path: string; title: string }) {
+function MovieBackdrop({ path, title }: { path?: string; title: string }) {
+  if (!path) return null
+
   const lowImgUrl = getTmdbImgPath({ path, size: 'w300' })
   const highImgUrl = getTmdbImgPath({ path, size: 'original' })
 

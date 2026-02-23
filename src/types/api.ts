@@ -1,8 +1,8 @@
-import { IContent } from './content'
+import { IMovie } from './content'
 
 export interface ITmdbContents {
   page: number
-  results: IContent[]
+  results: IMovie[]
   total_pages: number
   total_results: number
 }

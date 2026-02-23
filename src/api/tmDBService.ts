@@ -1,7 +1,7 @@
 import { API_CONFIG, API_ENDPOINT } from './config'
 import { IApiReturn, ITmdbContents } from '../types/api'
 import { devLog } from '../utils'
-import { IContent, IMovie } from '../types/content'
+import { IMovie } from '../types/content'
 
 // interface IFetch {
 //   path: string;
@@ -11,10 +11,10 @@ import { IContent, IMovie } from '../types/content'
 
 // }
 
-// get TV or Movie contents list
+// get Movie contents list result
 export const getTmdbContnets = async (
   endPoint: string,
-): Promise<IApiReturn<IContent[]>> => {
+): Promise<IApiReturn<IMovie[]>> => {
   try {
     const { BASE_URL, LANGUAGE, OPTIONS } = API_CONFIG
 
@@ -32,7 +32,7 @@ export const getTmdbContnets = async (
     }
 
     const result: ITmdbContents = await response.json()
-    const data: IContent[] = result?.results
+    const data: IMovie[] = result?.results
 
     return { data, error: null }
   } catch (error: unknown) {

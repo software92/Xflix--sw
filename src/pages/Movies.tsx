@@ -1,4 +1,4 @@
-import ContentsList from '../components/ContentsList'
+// 영화 장르별 목록을 보여주는 페이지
 
 // [o] TODO: 장르를 선택할 수 있는 select>option 요소 추가(모바일)
 
@@ -48,8 +48,8 @@ function Movies() {
         </div>
       </div>
 
-      <ContentsList title='액션' />
-      <ContentsList title='드라마' />
+      {/* <ContentsList title='액션' />
+      <ContentsList title='드라마' /> */}
       {/* <ContentsList title='코미디' />
       <ContentsList title='SF' /> */}
     </>

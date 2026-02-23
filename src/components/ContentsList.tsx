@@ -3,18 +3,16 @@ import { ICONS } from '../assets'
 import useGetContents from '../hooks/domain/useGetContents'
 import { Spinner } from './LoadingScreen'
 import ContentRow from './ContentRow'
-import { MediaType } from '../types/common'
 import { useRef, useState } from 'react'
 import { devLog } from '../utils'
 
 interface IContentsList {
   title: string
-  category: MediaType
   apiPath: ApiPath
 }
 type scrollDirection = 'LEFT' | 'RIGHT'
 
-function ContentsList({ title, category, apiPath }: IContentsList) {
+function ContentsList({ title, apiPath }: IContentsList) {
   const { isLoading, error, contents } = useGetContents(apiPath)
 
   const [isStart, setIsStart] = useState(true)
@@ -91,7 +89,6 @@ function ContentsList({ title, category, apiPath }: IContentsList) {
           {someOfContents.map(content => (
             <ContentRow
               key={content.id}
-              category={category}
               content={content}
             />
           ))}

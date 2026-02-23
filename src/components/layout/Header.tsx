@@ -15,7 +15,6 @@ interface INavItem {
 // constants/navigation.ts 또는 Header 내부 상단
 const NAV_ITEMS = [
   { id: 1, label: '홈', path: routes.ROOT },
-  { id: 2, label: 'TV 프로그램', path: routes.TV.LIST },
   { id: 3, label: '영화', path: routes.MOVIE.LIST },
 ]
 

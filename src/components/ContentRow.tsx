@@ -2,13 +2,10 @@ import { Link } from 'react-router'
 import { ICONS } from '../assets'
 import { IContent } from '../types/content'
 import { routes } from '../constants/routes'
-import { MediaType } from '../types/common'
 import { getTmdbImgPath } from '../utils'
-import { isMovie } from '../utils/typeGuards'
 
 interface IContentRow {
   content: IContent
-  category: MediaType
 }
 
 // [o] TODO: image cover 추가 > 추가 후 li의 border 제거
@@ -16,13 +13,10 @@ interface IContentRow {
 // [o] TODO: 아이콘 변경으로 재생 버튼의 색상 변경(fill: white)
 // [o] TODO: API 연결 후 props로 데이터를 받아 화면 출력
 // [o] TODO: API 연동 후 스타일 최종 수정
-function ContentRow({ content, category }: IContentRow) {
-  const isMovieCategory = category === MediaType.MOVIE
+function ContentRow({ content }: IContentRow) {
+  const navPath = (id: string | number) => routes.MOVIE.DETAIL(id)
 
-  const navPath = (id: string | number) =>
-    isMovieCategory ? routes.MOVIE.DETAIL(id) : routes.TV.DETAIL(id)
-
-  const title = isMovie(content) ? content.title : content.name
+  const title = content.title
 
   const lowImageUrl = getTmdbImgPath({
     size: 'w300',

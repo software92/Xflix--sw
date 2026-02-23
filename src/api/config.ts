@@ -21,9 +21,7 @@ export const API_CONFIG: IApiConfig = {
 
 export const API_ENDPOINT = {
   AUTH_VALID: '/authentication',
-  TRENDING: '/trending/all/week',
-  AIRING_TODAY: '/tv/airing_today',
-  TV_POPULAR: '/tv/popular',
+  TRENDING: '/trending/movie/week',
   NOW_PLAYING: '/movie/now_playing',
   MOVIE_POPULAR: '/movie/popular',
   MOVIE_DETAIL: (id: string | number) => `/movie/${id}`,

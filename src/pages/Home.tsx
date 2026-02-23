@@ -1,15 +1,42 @@
+import { API_ENDPOINT } from '../api/config'
 import FeaturedMovie from '../components/FeaturedMovie'
-import MoviesList from '../components/MoviesList'
+import ContentsList from '../components/ContentsList'
+
+// get api response types는 동일
+// 상영중인 영화
+// https://api.themoviedb.org/3/movie/now_playing
+// 인기 영화
+// https://api.themoviedb.org/3/movie/popular
+
+// (time_window: day, week)
+// 이주의 영화
+// https://api.themoviedb.org/3/trending/movie/{time_window}
+
+const categoryList = [
+  {
+    id: 1,
+    title: '상영중인 영화',
+    apiPath: API_ENDPOINT.NOW_PLAYING,
+  },
+  {
+    id: 3,
+    title: '인기 영화',
+    apiPath: API_ENDPOINT.MOVIE_POPULAR,
+  },
+]
 
 function Home() {
   return (
     <section>
       <FeaturedMovie />
       <article>
-        <MoviesList title='인기 콘텐츠' />
-        <MoviesList title='인기 콘텐츠' />
-        {/* <MoviesList title='지금 뜨는 콘텐츠' />
-        <MoviesList title='다시보기 추천' /> */}
+        {categoryList.map(contents => (
+          <ContentsList
+            key={contents.id}
+            title={contents.title}
+            apiPath={contents.apiPath}
+          />
+        ))}
       </article>
     </section>
   )

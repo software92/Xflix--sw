@@ -6,7 +6,6 @@ import useGetContents from '../hooks/domain/useGetContents'
 import { API_ENDPOINT } from '../api/config'
 import { devLog, getTmdbImgPath } from '../utils'
 import { useMemo } from 'react'
-import { isMovie } from '../utils/typeGuards'
 
 function FeaturedMovie() {
   const { TRENDING } = API_ENDPOINT
@@ -21,15 +20,13 @@ function FeaturedMovie() {
 
     return {
       id: content.id,
-      title: isMovie(content) ? content.title : content.name,
+      title: content.title,
       backdropPath: getTmdbImgPath({
         path: content.backdrop_path,
         size: 'original',
       }),
       overview: content.overview,
-      detailUrl: isMovie(content)
-        ? routes.MOVIE.DETAIL(content.id)
-        : routes.TV.DETAIL(content.id),
+      detailUrl: routes.MOVIE.DETAIL(content.id),
     }
   }, [contents])
 
