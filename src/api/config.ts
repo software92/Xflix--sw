@@ -22,6 +22,7 @@ export const API_CONFIG: IApiConfig = {
 export const API_ENDPOINT = {
   AUTH_VALID: '/authentication',
   TRENDING: '/trending/movie/week',
+  GENRES: '/genre/movie/list',
   MOVIE_UPCOMING: '/movie/upcoming',
   MOVIE_POPULAR: '/movie/popular',
   MOVIE_TOPRATED: '/movie/top_rated',

@@ -2,6 +2,7 @@ import { API_CONFIG, API_ENDPOINT } from './config'
 import { IApiReturn, ITmdbContents } from '../types/api'
 import { devLog } from '../utils'
 import { IMovie } from '../types/content'
+import { IGenre } from '../types/common'
 
 // interface IFetch {
 //   path: string;
@@ -10,6 +11,40 @@ import { IMovie } from '../types/content'
 // const commonFetch = async ({path, query}) => {
 
 // }
+
+export const getGenres = async (): Promise<IApiReturn<IGenre[]>> => {
+  try {
+    const { BASE_URL, LANGUAGE, OPTIONS } = API_CONFIG
+    const { GENRES } = API_ENDPOINT
+
+    const params = new URLSearchParams({ language: LANGUAGE })
+    const url = `${BASE_URL}${GENRES}?${params.toString()}`
+
+    const response = await fetch(url, OPTIONS)
+
+    if (!response.ok) {
+      const message = '장르를 알 수 없습니다.'
+      devLog({ message })
+      return { data: null, error: message }
+    }
+
+    const result: { genres: IGenre[] } = await response.json()
+
+    // API 응답에 genres 필드가 없을 경우를 대비한 방어 코드
+    if (!result || !result.genres) {
+      throw new Error('올바르지 않은 응답 데이터 형식입니다.')
+    }
+
+    return { data: result.genres, error: null }
+  } catch (error: unknown) {
+    const errorMessage =
+      error instanceof Error ? error.message : 'Unknown Error'
+
+    devLog({ message: 'getGenres: ' + errorMessage, type: 'error' })
+
+    return { data: null, error: errorMessage }
+  }
+}
 
 // get Movie contents list result
 export const getTmdbContnets = async (
