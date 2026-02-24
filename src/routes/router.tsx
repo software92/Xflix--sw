@@ -9,7 +9,7 @@ import { routes } from '../constants/routes'
 import { removeRootPath } from '../utils'
 import MovieDetail from '../pages/MovieDetail'
 
-export const router = createBrowserRouter([
+const routerRoutes = [
   {
     path: routes.ROOT,
     element: <RootLayout />,
@@ -31,4 +31,7 @@ export const router = createBrowserRouter([
       },
     ],
   },
-])
+]
+export const router = createBrowserRouter(routerRoutes, {
+  basename: '/XFlix--sw',
+})
