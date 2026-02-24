@@ -41,10 +41,10 @@ function ContentRow({ content }: { content: IMovie }) {
   })
 
   return (
-    <li className='relative aspect-video min-w-[300px] md:min-w-[380px] hover:opacity-60 transition-colors ease-in delay-150 duration-150 z-10 group/button-hover'>
+    <li className='relative aspect-video min-w-[300px] md:min-w-[380px] transition-colors ease-in delay-150 duration-150 z-10 group/button-hover'>
       <Link
         to={navPath(content.id)}
-        className='absolute inset-0'
+        className='absolute inset-0 hover:opacity-60'
         aria-label={`${contentMoreInfo.title} 상세보기`}
       >
         {content.backdrop_path && (
