@@ -10,6 +10,7 @@ import useGetMovie from '../hooks/domain/useGetMovie'
 import { getTmdbImgPath } from '../utils'
 import ImageLazyLoadUI from '../components/common/ImageLazyLoadUI'
 import AdultUI from '../components/AdultUI'
+import { Helmet } from 'react-helmet-async'
 
 interface IMovieMovieDetailSection {
   movie: IMovie | null
@@ -37,6 +38,9 @@ function MovieDetail() {
 
   return (
     <>
+      <Helmet>
+        <title>{movie?.title || 'Detail'}</title>
+      </Helmet>
       <article key={id}>
         <MovieMovieDetailSection
           movie={movie}

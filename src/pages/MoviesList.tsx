@@ -3,6 +3,7 @@ import { IGenre } from '../types/common'
 import { useCallback, useMemo, useState } from 'react'
 import ContentsList from '../components/ContentsList'
 import { API_ENDPOINT } from '../api/config'
+import { Helmet } from 'react-helmet-async'
 
 // [o] TODO: 장르를 선택할 수 있는 select>option 요소 추가(모바일)
 // [o] TODO: 선택된 button에 따라 컨텐츠 필터링
@@ -36,6 +37,9 @@ function MoviesList() {
   }
   return (
     <>
+      <Helmet>
+        <title>Movie List</title>
+      </Helmet>
       <div className='w-full pt-24 text-white main-page_px'>
         <div className='flex flex-col'>
           <label

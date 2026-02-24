@@ -55,7 +55,8 @@ function Header() {
           ${!isScroll ? 'bg-gradient-to-b from-black/80 to-transparent' : 'bg-black'}`}
       >
         <Link to={routes.ROOT}>
-          <h1 className='font-black text-3xl text-red-600 px-2'>XFlix</h1>
+          {/* <h1 className='font-black text-3xl text-red-600 px-2'>XFlix</h1> */}
+          {ICONS.logo}
         </Link>
         {/* desktop nav */}
         {!isOpen && (

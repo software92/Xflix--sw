@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async'
 import { useRouteError, isRouteErrorResponse } from 'react-router'
 import { Link } from 'react-router'
 
@@ -17,6 +18,9 @@ function ErrorPage() {
   }
   return (
     <main className='min-h-screen bg-black'>
+      <Helmet>
+        <title>Error</title>
+      </Helmet>
       <section className='w-screen min-h-screen flex justify-center items-center'>
         <div className='flex flex-col gap-8 justify-center items-center px-8 py-10'>
           <p className='text-5xl text-white text-center leading-snug'>

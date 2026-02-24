@@ -1,6 +1,8 @@
 import { API_ENDPOINT } from '../api/config'
 import FeaturedMovie from '../components/FeaturedMovie'
 import ContentsList from '../components/ContentsList'
+import { Helmet } from 'react-helmet-async'
+import { ICONS } from '../assets'
 
 // get api response types는 동일
 // 상영중인 영화
@@ -33,6 +35,9 @@ const categoryList = [
 function Home() {
   return (
     <section>
+      <Helmet>
+        <title>Home</title>
+      </Helmet>
       <FeaturedMovie />
       <article>
         {categoryList.map(contents => (
