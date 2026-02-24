@@ -2,17 +2,6 @@ import { API_ENDPOINT } from '../api/config'
 import FeaturedMovie from '../components/FeaturedMovie'
 import ContentsList from '../components/ContentsList'
 import { Helmet } from 'react-helmet-async'
-import { ICONS } from '../assets'
-
-// get api response types는 동일
-// 상영중인 영화
-// https://api.themoviedb.org/3/movie/now_playing
-// 인기 영화
-// https://api.themoviedb.org/3/movie/popular
-
-// (time_window: day, week)
-// 이주의 영화
-// https://api.themoviedb.org/3/trending/movie/{time_window}
 
 const categoryList = [
   {
