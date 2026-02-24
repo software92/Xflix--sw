@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router'
-import Movies from '../pages/Movies'
+import MoviesList from '../pages/MoviesList'
 import Home from '../pages/Home'
 import ErrorPage from '../pages/ErrorPage'
 import { LoadingScreen } from '../components/LoadingScreen'
@@ -22,7 +22,7 @@ export const router = createBrowserRouter([
       {
         path: removeRootPath(routes.MOVIE.LIST),
         children: [
-          { index: true, element: <Movies /> },
+          { index: true, element: <MoviesList /> },
           {
             path: removeRootPath(routes.MOVIE.PARAMETER),
             element: <MovieDetail />,
