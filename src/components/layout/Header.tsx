@@ -52,7 +52,7 @@ function Header() {
     <>
       <header
         className={`fixed top-0 w-full flex gap-16 p-4 z-20 transition-colors duration-500 ease-in-out
-          ${isScroll ? 'bg-gradient-to-b from-black/80 to-transparent' : 'bg-black'}`}
+          ${!isScroll ? 'bg-gradient-to-b from-black/80 to-transparent' : 'bg-black'}`}
       >
         <Link to={routes.ROOT}>
           <h1 className='font-black text-3xl text-red-600 px-2'>XFlix</h1>
