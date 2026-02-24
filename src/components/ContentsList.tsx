@@ -63,11 +63,11 @@ function ContentsList({ title, apiPath, params }: IContentsList) {
 
   return (
     <div
-      className='flex flex-col gap-4 p-4 text-white overflow-hidden h-60 my-10
+      className='flex flex-col gap-4 p-4 text-white overflow-hidden my-10
       main-page_px'
     >
       <h2 className='text-2xl font-bold'>{title}</h2>
-      <div className='relative h-full group'>
+      <div className='relative group'>
         {!isStart && (
           <button
             className='absolute top-0 bottom-0 left-0 w-10 bg-black/50 justify-center items-center z-[11] hidden group-hover:flex'
@@ -85,7 +85,7 @@ function ContentsList({ title, apiPath, params }: IContentsList) {
           </button>
         )}
         <ul
-          className='flex overflow-x-scroll scrollbar-hide gap-2 h-full'
+          className='flex overflow-x-scroll scrollbar-hide gap-2'
           ref={scrollRef}
           onScroll={handleScroll}
         >

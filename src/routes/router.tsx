@@ -4,7 +4,7 @@ import Home from '../pages/Home'
 import ErrorPage from '../pages/ErrorPage'
 import { LoadingScreen } from '../components/LoadingScreen'
 import RootLayout from '../components/layout/RootLayout'
-import { authLoader } from './authLoader'
+import { rootLoader } from './rootLoader'
 import { routes } from '../constants/routes'
 import { removeRootPath } from '../utils'
 import MovieDetail from '../pages/MovieDetail'
@@ -14,7 +14,8 @@ export const router = createBrowserRouter([
     path: routes.ROOT,
     element: <RootLayout />,
     errorElement: <ErrorPage />,
-    loader: authLoader,
+    loader: rootLoader,
+    id: 'root',
     HydrateFallback: () => <LoadingScreen />,
     children: [
       { index: true, element: <Home /> },
