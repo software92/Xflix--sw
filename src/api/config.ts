@@ -7,8 +7,7 @@ interface IApiConfig {
 }
 
 export const API_CONFIG: IApiConfig = {
-  BASE_URL:
-    import.meta.env.VITE_TMDB_BASE_URL || 'https://api.themoviedb.org/3',
+  BASE_URL: 'https://api.themoviedb.org/3',
   LANGUAGE: 'ko',
   OPTIONS: {
     method: 'GET',
