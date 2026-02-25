@@ -33,5 +33,5 @@ const routerRoutes = [
   },
 ]
 export const router = createBrowserRouter(routerRoutes, {
-  basename: '/XFlix--sw',
+  basename: '/Xflix--sw',
 })
