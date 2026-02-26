@@ -2,6 +2,7 @@
 
 [![Deploy](https://github.com/software92/Xflix--sw/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/software92/Xflix--sw/actions/workflows/deploy.yml)
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://software92.github.io/Xflix--sw/)
+[![Figma](https://img.shields.io/badge/Figma-Design-orange)](https://figma.com/xxxxx)
 
 TMDB API를 활용한 영화 정보 제공 웹 애플리케이션입니다.  
 React + TypeScript + Vite 기반으로 SPA 구조로 개발했습니다
@@ -11,10 +12,6 @@ React + TypeScript + Vite 기반으로 SPA 구조로 개발했습니다
 - 영화 상세 페이지 조회
 - 영화 장르별 필터링
 - GitHub Actions를 통한 자동 배포
-
-## 🎨 Design
-
-- Figma Design: https://figma.com/make/6gAd7XAT3ErQOj8xVDt8Cq/Movie-Detail-Page-Design?p=f&t=yjRhmvrQpisir2Zl-0&fullscreen=1
 
 ## 🛠 Tech Stack
 
