@@ -12,6 +12,10 @@ React + TypeScript + Vite 기반으로 SPA 구조로 개발했습니다
 - 영화 장르별 필터링
 - GitHub Actions를 통한 자동 배포
 
+## 🎨 Design
+
+- Figma Design: https://figma.com/make/6gAd7XAT3ErQOj8xVDt8Cq/Movie-Detail-Page-Design?p=f&t=yjRhmvrQpisir2Zl-0&fullscreen=1
+
 ## 🛠 Tech Stack
 
 ![React](https://img.shields.io/badge/React-18-blue)
