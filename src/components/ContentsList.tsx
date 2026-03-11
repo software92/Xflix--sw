@@ -70,7 +70,7 @@ function ContentsList({ title, apiPath, params }: IContentsList) {
       <div className='relative group'>
         {!isStart && (
           <button
-            className='absolute top-0 bottom-0 left-0 w-10 bg-black/50 justify-center items-center z-[11] hidden group-hover:flex'
+            className='absolute top-0 bottom-0 left-0 w-10 bg-gray-400/60 justify-center items-center z-[11] hidden group-hover:flex'
             onClick={() => moveScroll('LEFT')}
           >
             <span>{ICONS.leftArrow}</span>
@@ -78,22 +78,15 @@ function ContentsList({ title, apiPath, params }: IContentsList) {
         )}
         {!isEnd && (
           <button
-            className='absolute top-0 bottom-0 right-0 w-10 bg-black/50 justify-center items-center z-[11] hidden group-hover:flex'
+            className='absolute top-0 bottom-0 right-0 w-10 bg-gray-400/60 justify-center items-center z-[11] hidden group-hover:flex'
             onClick={() => moveScroll('RIGHT')}
           >
             <span>{ICONS.rightArrow}</span>
           </button>
         )}
-        <ul
-          className='flex overflow-x-scroll scrollbar-hide gap-2'
-          ref={scrollRef}
-          onScroll={handleScroll}
-        >
-          {someOfContents.map(content => (
-            <ContentRow
-              key={content.id}
-              content={content}
-            />
+        <ul className='flex overflow-x-scroll scrollbar-hide gap-2' ref={scrollRef} onScroll={handleScroll}>
+          {someOfContents.map((content) => (
+            <ContentRow key={content.id} content={content} />
           ))}
         </ul>
       </div>
