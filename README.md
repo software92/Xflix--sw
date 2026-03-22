@@ -4,12 +4,16 @@
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://software92.github.io/Xflix--sw/)
 [![Figma](https://img.shields.io/badge/Figma-Design-orange)](https://figma.com/xxxxx)
 
-TMDB API를 활용한 영화 정보 제공 웹 애플리케이션입니다.  
-React + TypeScript + Vite 기반으로 SPA 구조로 개발했습니다
+TMDB API를 활용한 영화 정보 웹 애플리케이션입니다.
+
+**React 기반 SPA 구조를 재정립하고, 외부 라이브러리 의존도를 최소화하여 핵심 로직을 직접 구현하는 것을 목표로 개발했습니다.**
+
+또한 사용자 관점에서 영화 탐색 경험을 개선하는 데 집중했습니다.
 
 ## 📌 Overview
 
-- 영화 상세 페이지 조회
+- SPA 구조 기반 페이지 전환
+- 영화 상세 정보 조회
 - 영화 장르별 필터링
 - GitHub Actions를 통한 자동 배포
 
@@ -26,11 +30,10 @@ React + TypeScript + Vite 기반으로 SPA 구조로 개발했습니다
 
 ### 주요 선택 이유
 
-- **React**: 컴포넌트 기반 SPA 구조
-- **TypeScript**: API 응답 타입 안정성 확보
-- **Vite**: 빠른 빌드 및 GitHub Pages 배포 최적화
-- **TailwindCSS**: 유틸리티 기반 스타일링으로 일관성 유지
-- **React Router**: SPA 라우팅 구조 설계
+- **React**: 컴포넌트 기반 SPA 구조를 통해 UI 재사용성과 유지보수성 확보
+- **TypeScript**: API 응답 데이터 타입 안정성 확보를 통한 런타임 오류 방지
+- **Vite**: 빠른 개발 서버 환경과 빌드 속도 개선 및 GitHub Pages 배포 최적화
+- **TailwindCSS**: 반복적인 스타일 작성 비용을 줄이고, UI를 빠르게 구현
 
 ## 🏗 Architecture
 
@@ -49,10 +52,9 @@ src/
 
 ### 설계 포인트
 
-- API 모듈 분리로 재사용성 확보
+- API 모듈 및 공통 컴포넌트 분리로 재사용성 확보
 - screen 크기에 따라 레이아웃 최적화
-- 공통 컴포넌트 분리
-- 환경 변수를 사용한 API 관리
+- 환경 변수를 사용한 API KEY 관리
 - GitHub Actions CI/CD 자동 배포
 
 ## 🔐 Environment Variables
