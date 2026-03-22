@@ -91,11 +91,10 @@ VITE_TMDB_KEY = your_api_key
 | <img width="285" height="642" alt="Image" src="https://github.com/user-attachments/assets/b86fb995-1f6f-482a-9148-fc12d891a471" /> | <img width="285" height="642" alt="Image" src="https://github.com/user-attachments/assets/c5056c44-f491-4f6a-acf0-2554d7a507fb" /> | <img width="285" height="642" alt="Image" src="https://github.com/user-attachments/assets/accc87bf-a956-4ee1-b522-c7c1c7c791f4" /> | <img width="285" height="642" alt="Image" src="https://github.com/user-attachments/assets/c1f1afb5-0ae5-437c-8591-3ad3f62760ab" /> |
 |                                                            메인 페이지                                                             |                                                          영화 상세 페이지                                                          |                                                          영화 목록 페이지                                                          |                                                         Mobile menu modal                                                          |
 
-## 💡 개선 가능 사항
+## 💡 향후 개선 가능 사항
 
-- 서버 프록시 도입을 통한 API 키 보호
-- React Query 도입으로 데이터 캐싱 개선
-- Skeleton UI 추가
+- 검색 기능 추가
+- API 캐싱 전략 적용
 
 ## 🔗 Live Demo
 
