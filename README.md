@@ -2,7 +2,7 @@
 
 [![Deploy](https://github.com/software92/Xflix--sw/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/software92/Xflix--sw/actions/workflows/deploy.yml)
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://software92.github.io/Xflix--sw/)
-[![Figma](https://img.shields.io/badge/Figma-Design-orange)](https://figma.com/xxxxx)
+[![Figma](https://img.shields.io/badge/Figma-Design-orange)](https://www.figma.com/make/6gAd7XAT3ErQOj8xVDt8Cq/Movie-Detail-Page-Design?p=f&t=zVHKCNqmHkqM0ES3-0)
 
 TMDB API를 활용한 영화 정보 웹 애플리케이션입니다.
 
