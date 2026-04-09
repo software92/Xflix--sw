@@ -4,75 +4,7 @@
 [![Live Demo](https://img.shields.io/badge/Live-Demo-brightgreen)](https://software92.github.io/Xflix--sw/)
 [![Figma](https://img.shields.io/badge/Figma-Design-orange)](https://www.figma.com/make/6gAd7XAT3ErQOj8xVDt8Cq/Movie-Detail-Page-Design?p=f&t=zVHKCNqmHkqM0ES3-0)
 
-TMDB API를 활용한 영화 정보 웹 애플리케이션입니다.
-
-**React 기반 SPA 구조를 재정립하고, 외부 라이브러리 의존도를 최소화하여 핵심 로직을 직접 구현하는 것을 목표로 개발했습니다.**
-
-또한 사용자 관점에서 영화 탐색 경험을 개선하는 데 집중했습니다.
-
-## 📌 Overview
-
-- SPA 구조 기반 페이지 전환
-- 영화 상세 정보 조회
-- 영화 장르별 필터링
-- GitHub Actions를 통한 자동 배포
-
-## 🛠 Tech Stack
-
-![React](https://img.shields.io/badge/React-18-blue)
-![TypeScript](https://img.shields.io/badge/TypeScript-5-blue)
-![Vite](https://img.shields.io/badge/Vite-5-purple)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-3-38bdf8)
-![React Router](https://img.shields.io/badge/React_Router-v6-red)
-![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-black)
-
-<!-- - **Icons:** Lucide React / React Icons (추천) -->
-
-### 주요 선택 이유
-
-- **React**: 컴포넌트 기반 SPA 구조를 통해 UI 재사용성과 유지보수성 확보
-- **TypeScript**: API 응답 데이터 타입 안정성 확보를 통한 런타임 오류 방지
-- **Vite**: 빠른 개발 서버 환경과 빌드 속도 개선 및 GitHub Pages 배포 최적화
-- **TailwindCSS**: 반복적인 스타일 작성 비용을 줄이고, UI를 빠르게 구현
-
-## 🏗 Architecture
-
-```text
-src/
-├── assets/       # SVG 아이콘 리소스
-├── routes/       # 라우터 설정 및 loader
-├── api/          # Promise 인스턴스, IMDB API 호출 로직
-├── constant/     # media query 및 라우터 경로 저장
-├── components/   # 공통 컴포넌트, 레이아웃 컴포넌트
-├── pages/        # 페이지
-├── hooks/        # 데이터 페칭 및 유틸 커스텀 훅
-├── types/        # TMDB API 응답 및 데이터 타입 정의
-└── utils/        # 유틸리티 함수(이미지 경로 변환, 로거)
-```
-
-### 설계 포인트
-
-- API 모듈 및 공통 컴포넌트 분리로 재사용성 확보
-- screen 크기에 따라 레이아웃 최적화
-- 환경 변수를 사용한 API KEY 관리
-- GitHub Actions CI/CD 자동 배포
-
-## 🔐 Environment Variables
-
-로컬 개발 시:
-
-```typescript
-VITE_TMDB_KEY = your_api_key
-```
-
-배포 환경에서는 GitHub Secrets를 통해 주입합니다.
-
-## 🚀 Deployment
-
-- GitHub Pages
-- GitHub Actions를 통해 main 브랜치 push 시 자동 배포
-
-## 🖥️ 서비스 화면
+## 서비스 화면
 
 ### PC
 
@@ -93,50 +25,130 @@ VITE_TMDB_KEY = your_api_key
 | <img width="285" height="642" alt="Image" src="https://github.com/user-attachments/assets/b86fb995-1f6f-482a-9148-fc12d891a471" /> | <img width="285" height="642" alt="Image" src="https://github.com/user-attachments/assets/c5056c44-f491-4f6a-acf0-2554d7a507fb" /> | <img width="285" height="642" alt="Image" src="https://github.com/user-attachments/assets/accc87bf-a956-4ee1-b522-c7c1c7c791f4" /> | <img width="285" height="642" alt="Image" src="https://github.com/user-attachments/assets/c1f1afb5-0ae5-437c-8591-3ad3f62760ab" /> |
 |                                                            메인 페이지                                                             |                                                          영화 상세 페이지                                                          |                                                          영화 목록 페이지                                                          |                                                         Mobile menu modal                                                          |
 
-## 💡 향후 개선 가능 사항
+## 1. 프로젝트 소개
 
-- 검색 기능 추가
-- API 캐싱 전략 적용
+Xflix는 TMDB API를 활용한 영화 정보 제공 웹 애플리케이션입니다.
 
-## 🔗 Live Demo
+단순한 영화 목록 조회를 넘어,
+사용자가 원하는 콘텐츠를 빠르게 탐색할 수 있도록
+장르 기반 필터링과 직관적인 UI 구조 설계에 초점을 맞춰 개발했습니다.
 
-👉 https://software92.github.io/Xflix--sw/
+## 2. 주요 기능
 
-<!--
-보강 포인트
-- **Infinite Scroll**: Intersection Observer API 또는 React Query를 활용하여 페이지 하단 도달 시 데이터를 자동으로 추가 페칭, 끊김 없는 사용자 경험 제공
-- **Image Optimization**: TMDB 원본 이미지를 디바이스 크기에 맞는 해상도로 리사이징하여 로딩 속도 최적화
-- **Debounced Search**: 검색어 입력 시 API 호출 횟수를 최적화하기 위해 Debounce 기법 적용
-  적용
+- 영화 목록 및 상세 페이지 조회
+- 장르 기반 영화 필터링
+- 반응형 UI (PC / Mobile 지원)
+- GitHub Actions 기반 CI/CD 자동 배포
 
-📂 Structure (Updated)
-Plaintext
-src/
-├── api/ # Axios 인스턴스 및 TMDB API endpoints
-├── components/
-│ ├── common/ # Button, Input, Loading Spinner 등 공통 UI
-│ ├── layout/ # Navbar, Footer, PageLayout
-│ └── movie/ # MovieCard, MovieList, ScrollContainer
-├── hooks/
-│ ├── useInfiniteScroll.ts # 무한 스크롤 로직 커스텀 훅
-│ └── useDebounce.ts # 검색어 최적화 훅
-├── pages/ # Main, Movies, TVs, Search, Detail
-├── types/ # API 응답 및 데이터 인터페이스
-└── utils/ # 포맷팅, 이미지 URL 생성 등
-🛠 Tech Stack (Updated)
-Framework: React (Vite)
+## 3. 기술 스택
 
-State Management: React Query (TanStack Query) — 데이터 캐싱 및 무한 스크롤 구현 시 강력 추천
+- React
+- TypeScript
+- Vite
+- TailwindCSS
+- GitHub Actions
 
-Language: TypeScript
+## 4. 기술 개선 및 설계
 
-Styling: TailwindCSS
+### 4.1 프로젝트 환경 구성 (Vite + TypeScript)
 
-Data Source: TMDB API
+React + Vite 기반으로 개발 환경을 구성하고
+TypeScript를 도입하여 API 응답 데이터의 타입 안정성을 확보했습니다.
 
-💡 추가 제안 (Point of View)
-React Query 활용: 만약 무한 스크롤을 구현하신다면 useInfiniteQuery를 사용하시는 것을 적극 추천합니다. 이 부분을 README에 명시하면 "서버 상태 관리를 할 줄 아는 개발자"라는 인상을 줍니다.
+- 빠른 빌드 속도 및 개발 생산성 향상
+- 정적 타입 기반 안정적인 데이터 처리
 
-Intersection Observer: 라이브러리 없이 직접 구현하셨다면 해당 부분을 강조하여 브라우저 API 활용 능력을 어필해 보세요.
+### 4.2 API 모듈 분리 및 데이터 관리 구조 설계
 
-Skeleton UI: 데이터를 불러올 때 MovieCard 모양의 회색 박스(Skeleton)가 나타나게 구현하면 훨씬 전문적인 앱처럼 보입니다. -->
+TMDB API 호출 로직을 별도의 모듈로 분리하여
+데이터 처리 로직과 UI를 분리했습니다.
+
+- API 로직 재사용성 향상
+- 유지보수 용이성 확보
+- 환경 변수를 통한 API 키 관리
+
+### 4.3 반응형 UI 및 컴포넌트 구조 설계
+
+디바이스 크기에 따라 레이아웃이 자연스럽게 변경되도록 설계하고 공통 컴포넌트를 분리해서 UI 일관성을 유지했습니다.
+
+- 다양한 디바이스 환경 대응
+- 재사용 가능한 컴포넌트 구조 설계
+
+### 4.4 배포 자동화 (GitHub Actions)
+
+GitHub Actions를 활용하여
+main 브랜치 push 시 자동으로 빌드 및 배포가 이루어지도록 구성했습니다.
+(README.md만 변경한 경우 제외)
+
+- 배포 자동화
+- 개발 → 배포 프로세스 간소화
+
+## 5. 기술 선택 이유
+
+**TypeScript**
+
+API 응답 데이터의 타입을 명확히 정의하여
+런타임 오류를 줄이고 안정적인 데이터 처리를 위해 사용했습니다.
+
+**Vite**
+
+빠른 개발 서버와 빌드 속도를 통해
+개발 생산성을 높이기 위해 선택했습니다.
+
+**TailwindCSS**
+
+유틸리티 기반 스타일링으로
+일관된 UI를 빠르게 구성하기 위해 사용했습니다.
+
+**GitHub Actions**
+
+반복적인 배포 작업을 자동화하여
+개발 효율성을 높이기 위해 도입했습니다.
+
+## 6. 사용자 경험 개선 포인트
+
+### 6.1 장르 기반 탐색 UX 개선
+
+사용자가 원하는 영화를 빠르게 찾을 수 있도록
+장르 필터링 기능을 제공했습니다.
+
+- 콘텐츠 탐색 시간 감소
+- 사용자 중심 UI 개선
+
+### 6.2 반응형 UI 설계
+
+PC와 모바일 환경에서 모두 자연스럽게 동작하도록
+레이아웃을 설계했습니다.
+
+- 다양한 디바이스 환경 대응
+- 일관된 사용자 경험 제공
+
+### 6.3 직관적인 상세 페이지 구성
+
+영화 정보를 한눈에 확인할 수 있도록
+상세 페이지 UI를 구성했습니다.
+
+- 정보 전달력 강화
+- 사용자 이해도 향상
+
+## 7. 내가 담당한 역할
+
+- 전체 프론트엔드 개발 (단독 프로젝트)
+- UI 설계 및 사용자 인터랙션 구현
+- API 연동 및 데이터 처리 구조 설계
+- 반응형 UI 구현
+- 배포 자동화 구성 (GitHub Actions)
+
+## 8. 아쉬운 점 및 개선 방향
+
+- 서버 프록시 도입을 통한 API 키 보안 강화
+- React Query 도입을 통한 서버 상태 캐싱 및 데이터 관리 개선
+- Skeleton UI 적용을 통한 로딩 UX 개선
+- 무한 스크롤 또는 페이지네이션 도입으로 탐색 경험 향상
+
+## 9. 실행 방법
+
+```bash
+npm install
+npm run dev
+```
